@@ -6,51 +6,40 @@ import com.acorn.example.jpa.service.DemoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/jpademo/")
 public class DemoController {
 
   private final DemoService demoService;
 
-  @GetMapping(value = "/demoEntity")
+  @GetMapping(value = "")
   public ResponseEntity getDemoEntity(DemoDTO demoDTO) {
     List<DemoDTO> demoDTOs = demoService.retrieveDemo();
     return ResponseUtils.completed(demoDTOs);
   }
 
-  @GetMapping(value = "/demo")
+  @GetMapping(value = "/obj")
   public List<DemoDTO> getDemo(DemoDTO demoDTO) {
-
     return demoService.retrieveDemo();
   }
 
-  @GetMapping(value = "/demoException")
-  public List<DemoDTO> getDemoException(DemoDTO demoDTO) {
-
-    return demoService.retrieveDemoException();
-  }
-
-  @GetMapping(value = "/demoNoException")
-  public List<DemoDTO> retrieveDemoNoCodeException(DemoDTO demoDTO) {
-    return demoService.retrieveDemoNoCodeException();
-  }
-
-  @GetMapping(value = "/demoArrayException")
-  public List<DemoDTO> retrieveDemoArrayException(DemoDTO demoDTO) {
-
-    return demoService.retrieveDemoArrayException();
-  }
-
-  @GetMapping(value = "/demoNoFormetException")
-  public List<DemoDTO> retrieveDemoNoCodeFormatException(DemoDTO demoDTO) {
-    return demoService.retrieveDemoNoCodeFormatException();
+  @PostMapping(value = "")
+  public DemoDTO saveDemo(@RequestBody DemoDTO demoDTO) {
+    return demoService.saveDemo(demoDTO);
   }
 
 
+
+//  @GetMapping("{name}")
+//  public ResponseEntity retrieveDemoPage(@PathVariable String name,
+//                                         Pageable pageable) {
+//    List<DemoDTO> demoDTOs = demoService.retrieveDemo(name, pageable);
+//    return ResponseUtils.completed(demoDTOs);
+//  }
 }

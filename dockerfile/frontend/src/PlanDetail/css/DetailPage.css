@@ -1,0 +1,49 @@
+.detail-page-container{
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.img{
+    border-radius: 5px;
+    z-index: -1;
+    filter: brightness(0.7);
+}
+
+
+
+.image-container{
+    position: relative;
+    display: flex;
+    border-radius: 5px;
+    border: 2px solid #9E9E9E  ;
+    height: 350px;
+    width: 100%;
+    margin: auto;
+}
+
+.font-kor{
+    position: absolute;
+    font-size: 48px;
+    left: 2%;
+    top: 50%;
+    color: white;
+}
+.font-eng{
+    position: absolute;
+    font-size: 36px;
+    left: 2%;
+    top: 70%;
+    color: #9E9E9E;
+}
+
+.categori{
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid #9E9E9E  ;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+

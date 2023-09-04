@@ -1,34 +1,26 @@
-// import React, { useState } from 'react';
 import CardContent from '@mui/material/CardContent';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, Card } from '@mui/material';
-import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
+import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import StarIcon from '@mui/icons-material/Star';
+import { textOverCut } from './textOverCut.js';
 
-function textOverCut(txt, len, lastTxt) {
-    if (len === '' || len == null) {
-        // 기본값
-        len = 12;
-    }
-    if (lastTxt === '' || lastTxt == null) {
-        // 기본값
-        lastTxt = '...';
-    }
-    if (txt.length > len) {
-        txt = txt.substr(0, len) + lastTxt;
-    }
-    return txt;
-}
+export default function AppendCard({ selectedItems, setSelectedItems }) {
+    const removeBtnClick = (itemToRemove) => {
+        // 선택한 항목을 제외한 나머지 항목들을 유지하는 방법으로 필터링
+        const updatedItems = selectedItems.filter((item) => item.contentid !== itemToRemove.contentid);
+        setSelectedItems([updatedItems]);
+    };
 
-export default function AppendCard({ selectedItems }) {
-    // console.log('Test.jsx :', { selectedItems });
+    const itemsToDisplay = selectedItems || [];
+
     return (
         <>
-            {selectedItems.map((item, index) => (
+            {itemsToDisplay.map((item, index) => (
                 <Card
-                    key={index}
+                    key={item.contentid}
                     sx={{
                         display: 'flex',
                         width: 'auto',
@@ -40,7 +32,13 @@ export default function AppendCard({ selectedItems }) {
                 >
                     <CardMedia
                         component="img"
-                        sx={{ width: 70, height: 70, flexGrow: '1', borderRadius: '5px', marginLeft: '10px' }}
+                        sx={{
+                            width: 70,
+                            height: 70,
+                            flexGrow: '1',
+                            borderRadius: '5px',
+                            marginLeft: '10px',
+                        }}
                         image={item.firstimage}
                     />
                     <CardContent sx={{ position: 'static', flexGrow: '5' }}>
@@ -83,6 +81,7 @@ export default function AppendCard({ selectedItems }) {
                         }}
                     >
                         <Button
+                            onClick={() => removeBtnClick(item)}
                             sx={{
                                 height: '30px',
                                 width: '30px',
@@ -91,7 +90,7 @@ export default function AppendCard({ selectedItems }) {
                                 marginRight: '9px',
                             }}
                         >
-                            <AddBoxRoundedIcon />
+                            <IndeterminateCheckBoxIcon color="error" />
                         </Button>
                     </div>
                 </Card>

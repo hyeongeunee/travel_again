@@ -1,10 +1,10 @@
 package com.acorn.work.loading.service;
 
 import com.acorn.core.customException.BizException;
-import com.acorn.work.dto.TourListDTO;
+import com.acorn.work.dto.TourlistDTO;
 import com.acorn.work.entity.TourlistEntity;
+import com.acorn.work.mapstruct.TourlistMapper;
 import com.acorn.work.repository.TourlistRepository;
-import com.acorn.work.repository.WorkMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.NonNull;
@@ -33,10 +33,10 @@ public class TourlistLoadingService {
 
         Reader reader = fileLoad(filename);
 
-        List<TourListDTO> tourlistdto =  gson.fromJson(reader,
-                new TypeToken<List<TourListDTO>>(){}.getType() );
+        List<TourlistDTO> tourlistdto =  gson.fromJson(reader,
+                new TypeToken<List<TourlistDTO>>(){}.getType() );
 
-        List<TourlistEntity> tourlistEntities = WorkMapper.INSTANCE.toTourlistEntitys(tourlistdto);
+        List<TourlistEntity> tourlistEntities = TourlistMapper.INSTANCE.toEntities(tourlistdto);
 
         tourlistRepository.saveAll(tourlistEntities);
 
@@ -63,6 +63,7 @@ public class TourlistLoadingService {
     private Reader fileLoad(String filename) {
         Reader reader = null;
         try {
+            System.out.println(this.tourlistDir);
             reader = new FileReader( this.tourlistDir +"/"+ filename + ".json");
         } catch (FileNotFoundException e) {
             throw new BizException(filename + " 파일이 없습니다.");

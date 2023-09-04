@@ -11,6 +11,7 @@ import java.util.List;
 public interface DemoMapper {
   DemoMapper INSTANCE = Mappers.getMapper(DemoMapper.class);
 
-  List<DemoDTO> toDemoEntirys(List<DemoEntity> demoEntities);
-
+  List<DemoDTO> toDemoDTOs(List<DemoEntity> demoEntities);
+  DemoEntity toDemoEntitys(DemoDTO demoDTO);
+  DemoDTO toDemoDTO(DemoEntity eemoEntity);
 }

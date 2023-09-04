@@ -1,0 +1,39 @@
+.table-head{
+    border-collapse: collapse;
+    height: 50px;
+    display: flex;
+    box-shadow: 
+    1px 0 0 0 #888, 
+    0 1px 0 0 #888, 
+    1px 1px 0 0 #888,
+    1px 0 0 0 #888 inset, 
+    0 1px 0 0 #888 inset;
+}
+
+.dayblock{
+    display: flex;
+    text-align: center;
+    background-color: #083041;
+    color: #EEEEEE;
+    height: 100%;
+    width: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.day-loc-div{
+    
+    width: 88%;
+    height: 100%;
+}
+.day-text{
+    color: #6E6E6E;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 0;
+}   
+.loc-text{
+    font: bold;
+    margin: 0;
+    margin-left: 2%;
+}

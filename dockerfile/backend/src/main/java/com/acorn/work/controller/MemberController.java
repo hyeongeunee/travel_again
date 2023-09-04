@@ -1,14 +1,46 @@
 package com.acorn.work.controller;
 
+import com.acorn.core.utils.ResponseUtils;
 import com.acorn.work.dto.MemberDTO;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.acorn.work.service.MemberService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller("/member/")
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 
-    @GetMapping("insert")
-    public void insert(MemberDTO dto){
+    private final MemberService memberService;
 
+
+    /**
+     * 회원가입
+     * @param memberDTO
+     * @return memberId
+     */
+    @PostMapping("/signup")
+    public ResponseEntity signup(@RequestBody MemberDTO memberDTO){
+
+        String memberNo = memberService.signup(memberDTO);
+        Map<String,String> memberMap = new HashMap<>();
+        memberMap.put("memberId",memberDTO.getMemberId());
+        memberMap.put("memberNo",memberNo);
+        return ResponseUtils.completed(memberMap);
     }
+
+    @PostMapping("/signin")
+    public ResponseEntity signin(@RequestBody MemberDTO memberDTO){
+        String memberId = memberService.signIn(memberDTO);
+        return ResponseUtils.completed(memberId);
+    }
+
+
 }

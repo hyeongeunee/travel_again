@@ -1,0 +1,15 @@
+
+
+.tourCard-container {  
+    cursor: pointer; 
+    margin: 20px;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  transition: 0.3s ease; 
+  }
+
+.tourCard-container:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+  

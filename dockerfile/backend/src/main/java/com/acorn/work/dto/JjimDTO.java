@@ -1,17 +1,21 @@
 package com.acorn.work.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 public class JjimDTO {
 
-    private int jjimid;
+    private String jjimNo;
 
-    private String memberId;
+    private String memberNo;
 
-    private int recommend_tourlistno;
+    private String recommend_contentid;
 
-    private int add_tourlistno;
+    private String add_contentid;
 }

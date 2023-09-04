@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+//@EnableScheduling
 @EnableJpaRepositories(basePackages = {"com.acorn.core.*", "com.acorn.example.*","com.acorn.work.*"})
 @EnableJpaAuditing
 //@EnableElasticsearchRepositories(basePackages = "com.acorn.travelagain.es.*")

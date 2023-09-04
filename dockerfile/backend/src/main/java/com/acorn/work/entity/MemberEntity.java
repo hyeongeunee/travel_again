@@ -1,10 +1,8 @@
 package com.acorn.work.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,9 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class MemberEntity {
 
     @Id
+    @Column(length = 36)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String memberNo;
+
     @Column(length = 32)
     private String memberId;
 
@@ -25,6 +28,7 @@ public class MemberEntity {
     @Column(length = 100)
     private String pwd;
 
+    @Column(length = 100)
     private String birth;
 
     @Column(length = 1)
