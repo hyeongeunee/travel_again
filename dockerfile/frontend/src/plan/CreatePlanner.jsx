@@ -13,6 +13,7 @@ import ko from "date-fns/locale/ko";
 import { DateRange } from "@mui/icons-material";
 import RealTimeList from "./tourList/RealTimeList";
 import RecommendRank from "./tourList/RecommendRank";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 
 function CreatePlanner() {
@@ -97,13 +98,6 @@ function CreatePlanner() {
               checkingEDate={checkingEDate}
               datesArray={datesArray}
             />
-
-            <PlanCard
-              setSelectedItems={setSelectedItems}
-              selectedItems={selectedItems}
-              selectedIndex={selectedIndex}
-              areaData={areaData}
-            />
           </Grid>
           <Grid
             item
@@ -145,7 +139,7 @@ function CreatePlanner() {
             onClick={sendData}
             size="large"
           >
-            일정 생성하기
+            일정 생성하기 <KeyboardArrowRightIcon />
           </Button>
         </Link>
       </div>

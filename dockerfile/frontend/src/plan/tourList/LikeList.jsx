@@ -12,7 +12,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import TourModal from '../modal/TourModal';
 
-export default function RealTimeList({ selectedItems, setSelectedItems, selectedIndex, areaData }) {
+export default function LikeList({ selectedItems, setSelectedItems, selectedIndex, areaData }) {
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = (contentid) => {
         setSelectedContentId(contentid);
