@@ -1,11 +1,8 @@
-import './whereToGo.css';
-import * as React from 'react';
-import FormControl from '@mui/material/FormControl';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
-import NativeSelect from '@mui/material/NativeSelect';
+import "./whereToGo.css";
+import * as React from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+import { Divider, InputBase, Paper } from "@mui/material";
 import axios from 'axios';
 
 function WhereToGo() {
@@ -29,40 +26,33 @@ function WhereToGo() {
         }
     };
     return (
-        <div className="container">
-            <h2>어디로 여행을 떠나시나요?</h2>
-            <div style={{ margin: 20, padding: 20 }}>
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    sx={{
-                        '& .MuiTextField-root': { m: 1, width: '80ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                    {' '}
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
-                        <NativeSelect
-                            defaultValue={'none'}
-                            inputProps={{
-                                name: 'category',
-                                id: 'uncontrolled-native',
-                            }}
-                        >
-                            <option value={'title'}>여행지</option>
-                            <option value={'seoul'}>서울</option>
-                            <option value={'busan'}>부산</option>
-                            <option value={'daejeon'}>대전</option>
-                        </NativeSelect>
-                    </FormControl>
-                    <TextField name="keyword" id="standard-search" type="search" variant="standard" />
-                    <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Box>
-            </div>
+        <div className="wtg-container">
+        <h2>어디로 여행을 떠나시나요?</h2>
+        <div className="searchBar-grid">
+        <Paper
+          className="searchBar-container"
+          component="form"
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            borderRadius:"20px",
+            boxShadow:" 0 4px 6px rgba(0,0,0,0.30)"
+          }}
+        >
+          <InputBase
+            className="searchBar"
+            sx={{ ml: 3, flex: 1 }}
+            placeholder="지역명을 검색해 주세요"
+            inputProps={{ "aria-label": "#" }}
+            name="keyword"
+            type="search"
+          />
+          <IconButton type="button" sx={{ p: "10px"}} aria-label="search">
+            <SearchIcon style={{fontSize:"37px"}} type="submit"/>
+          </IconButton>
+        </Paper>
         </div>
+      </div>
     );
 }
 
