@@ -109,7 +109,7 @@ function Map({ selectedItems, areaData }) {
       id="map"
       style={{
         width: '100%',
-        height: '900px',
+        height: '750px',
       }}
     ></div>
   );

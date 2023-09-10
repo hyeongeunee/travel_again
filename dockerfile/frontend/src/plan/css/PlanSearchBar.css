@@ -1,0 +1,16 @@
+.plan-searchBar-grid{
+    display: flex;
+    justify-content: center;
+}
+
+.plan-searchBar-container{
+    height: 34px;
+    width: 90%;
+    
+}
+
+.plan-searchBar-container:hover{
+    box-shadow: 0 7px 9px rgba(0,0,0,0.30);
+    
+}
+

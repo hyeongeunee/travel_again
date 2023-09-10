@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./css/CreatePlanner.css";
 import Map from "./Map";
-import PlanCard from "./PlanCard";
 import { Button, Grid } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import DateAccordion from "./date/DateAccordion";
@@ -10,11 +9,10 @@ import DatePicker from "./date/DatePicker";
 import axios from "axios";
 import { format } from "date-fns";
 import ko from "date-fns/locale/ko";
-import { DateRange } from "@mui/icons-material";
-import RealTimeList from "./tourList/RealTimeList";
-import RecommendRank from "./tourList/RecommendRank";
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import PlanCard from "./PlanCard";
+import PlanSearchBar from "./PlanSearchBar";
+import Divider from '@mui/material/Divider';
 
 function CreatePlanner() {
   const [dateLength, setDateLength] = useState(0);
@@ -23,6 +21,7 @@ function CreatePlanner() {
   const [startDate, setStartDate] = useState(0);
   const [endDate, setEndDate] = useState(0);
   const [datesArray, setDatesArray] = useState(0);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
   const location = useLocation();
   //console.log(location);
   const areaData = location.state ? location.state.areaData : null;
@@ -91,23 +90,14 @@ function CreatePlanner() {
       </div>
       <div className="TestContainer">
         <Grid container className="gridContainer">
-          <Grid item className="rightbar" xs={12} sm={2}>
+          <Grid item className="leftbar" xs={12} sm={2}>
             <DatePicker
               onDateChange={handleDateChange}
               checkingSDate={checkingSDate}
               checkingEDate={checkingEDate}
               datesArray={datesArray}
             />
-          </Grid>
-          <Grid
-            item
-            className="leftbar"
-            xs={12}
-            sm={2}
-            style={{ padding: "0" }}
-          >
-            <h3>선택된 여행지</h3>
-            <hr />
+            <Divider><h3>선택된 여행지</h3></Divider>
             <DateAccordion
               dateLength={dateLength}
               setSelectedItems={setSelectedItems}
@@ -115,10 +105,24 @@ function CreatePlanner() {
               setSelectedIndex={setSelectedIndex}
             />
           </Grid>
+         
+            
+           
+
           <DateAlert dateLength={dateLength} />
 
           <Grid item className="maparea" xs={12} sm={8}>
             <Map selectedItems={selectedItems} areaData={areaData} />
+          </Grid>
+          <Grid item className="rightbar" xs={12} sm={2}>
+         
+            <PlanSearchBar/>
+            <PlanCard
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+              selectedIndex={selectedIndex}
+              areaData={areaData}
+            />
           </Grid>
         </Grid>
       </div>

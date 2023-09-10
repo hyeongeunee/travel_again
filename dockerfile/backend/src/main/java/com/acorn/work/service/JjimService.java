@@ -36,12 +36,13 @@ public class JjimService {
     public void randomRecommendTourlist (String contentid){
         //        String memberId = (String) session.getAttribute("id");
         //        String memberNo = memberRepository.findByMemberId(memberId).getMemberNo();
-        System.out.println(contentid);
+//        System.out.println(contentid);
+
 
         // 랜덤 테스트 코드
         List<MemberDTO> memberDTOS = MemberMapper.INSTANCE.toDTOs(memberRepository.findAll());
         Random ran = new Random();
-        System.out.println(memberDTOS.toString());
+//        System.out.println(memberDTOS.toString());
 
 
         JjimDTO jjimDTO = JjimDTO.builder()
@@ -49,7 +50,7 @@ public class JjimService {
                 .memberNo(memberDTOS.get(ran.nextInt(10)).getMemberNo())
                 .build();
 
-        System.out.println(jjimDTO);
+//        System.out.println(jjimDTO);
 
         jjimRepository.save(JjimMapper.INSTANCE.toEntity(jjimDTO));
     }

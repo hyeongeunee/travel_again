@@ -28,4 +28,9 @@ public interface TourListDocRepository extends ElasticsearchRepository<TourListD
             @HighlightField(name = "title")
     })
     Page<SearchHit<TourListDoc>> findHitsByOverview(String overview, Pageable pageable);
+
+    List<TourListDoc> findByOrderByAddCountDesc(Pageable pageable);
+    List<TourListDoc> findByOrderByRecommendCountDesc(Pageable pageable);
+
+    Page<TourListDoc> findByTitleOrOverviewOrAddr1(String title, String overview, String addr1, Pageable pageable);
 }

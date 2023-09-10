@@ -55,4 +55,14 @@ public class TourlistController {
     public ResponseEntity getTourlistPageByCondition(@RequestBody TourlistConditionReqDTO tourlistConditionReqDTO, Pageable pageable){
         return ResponseUtils.completed(tourlistService.findTourlistPage(tourlistConditionReqDTO,pageable));
     }
+
+    @GetMapping("/list/rec")
+    public ResponseEntity getTourlistOrderByRec(@PageableDefault(page=0,size=5)Pageable pageable) {
+        return ResponseUtils.completed(tourlistService.getTourlistByRec(pageable));
+    }
+
+    @GetMapping("/list/add")
+    public ResponseEntity getTourlistOrderByAdd(@PageableDefault(page=0,size=5)Pageable pageable) {
+        return ResponseUtils.completed(tourlistService.getTourlistByAdd(pageable));
+    }
 }

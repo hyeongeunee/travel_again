@@ -5,10 +5,7 @@ import com.acorn.work.dto.MemberDTO;
 import com.acorn.work.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +31,12 @@ public class MemberController {
         memberMap.put("memberId",memberDTO.getMemberId());
         memberMap.put("memberNo",memberNo);
         return ResponseUtils.completed(memberMap);
+    }
+
+    @PostMapping("/checkid/{checkId}")
+    public ResponseEntity checkId(@PathVariable String checkId){
+        Boolean isExist = memberService.checkId(checkId);
+        return ResponseUtils.completed(isExist);
     }
 
     @PostMapping("/signin")

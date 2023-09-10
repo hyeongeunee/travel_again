@@ -11,6 +11,7 @@ import { textOverCut } from '../util/textOverCut';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import TourModal from './modal/TourModal';
+import Divider from '@mui/material/Divider';
 
 export default function PlanCard({ selectedItems, setSelectedItems, selectedIndex, areaData }) {
     const [modalOpen, setModalOpen] = useState(false);
@@ -84,87 +85,86 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
 
     return (
         <>
-            <h3>추천 관광지</h3>
-            <hr />
-            {displayedItems.map((item, i) => (
-                <Card
-                    key={item.contentId}
-                    sx={{
-                        display: 'flex',
-                        width: 'auto',
-                        height: '60px',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        marginBottom: '8px',
-                    }}
-                >
-                    <CardMedia
-                        component="img"
-                        onClick={() => openModal(item.contentid)}
+            <Divider><h3>추천 관광지</h3></Divider>
+                {displayedItems.map((item, i) => (
+                    <Card
+                        key={item.contentId}
                         sx={{
-                            width: 40,
-                            height: 40,
-                            flexGrow: '1',
-                            borderRadius: '5px',
-                            marginLeft: '10px',
-                        }}
-                        image={item.firstimage}
-                        alt={item.title}
-                    />
-                    <CardContent sx={{ position: 'static', flexGrow: '5' }} onClick={() => openModal(item.contentid)}>
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{
-                                fontWeight: 'bold',
-                                fontSize: 10,
-                            }}
-                        >
-                            {textOverCut(item.title, 10.8, '...')}
-                        </Typography>
-                        <div>
-                            <FavoriteIcon sx={{ fontSize: 13, color: '#F44336' }} />
-                            <StarIcon sx={{ fontSize: 14, color: '#FBC02D' }} />
-                        </div>
-                    </CardContent>
-                    <div
-                        style={{
-                            flexGrow: '1',
                             display: 'flex',
-                            flexDirection: 'row-reverse',
-                            justifyContent: 'center',
+                            width: 'auto',
+                            height: '60px',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            marginBottom: '8px',
                         }}
                     >
-                        <Button
-                            className="addBtn"
-                            onClick={() => handleAddButtonClick(item)}
+                        <CardMedia
+                            component="img"
+                            onClick={() => openModal(item.contentid)}
                             sx={{
-                                height: '30px',
-                                width: '30px',
-                                padding: '0',
-                                minWidth: '0',
-                                marginRight: '9px',
+                                width: 40,
+                                height: 40,
+                                flexGrow: '1',
+                                borderRadius: '5px',
+                                marginLeft: '10px',
+                            }}
+                            image={item.firstimage}
+                            alt={item.title}
+                        />
+                        <CardContent sx={{ position: 'static', flexGrow: '5' }} onClick={() => openModal(item.contentid)}>
+                            <Typography
+                                variant="h6"
+                                component="div"
+                                sx={{
+                                    fontWeight: 'bold',
+                                    fontSize: 10,
+                                }}
+                            >
+                                {textOverCut(item.title, 10.8, '...')}
+                            </Typography>
+                            <div>
+                                <FavoriteIcon sx={{ fontSize: 13, color: '#F44336' }} />
+                                <StarIcon sx={{ fontSize: 14, color: '#FBC02D' }} />
+                            </div>
+                        </CardContent>
+                        <div
+                            style={{
+                                flexGrow: '1',
+                                display: 'flex',
+                                flexDirection: 'row-reverse',
+                                justifyContent: 'center',
                             }}
                         >
-                            <AddBoxRoundedIcon />
-                        </Button>
-                    </div>
-                </Card>
-            ))}
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button onClick={handlePreviousPage} disabled={currentPage === 0} >
-                    {' '}
-                    <ArrowBackIosNewIcon style={{fontSize:"16px"}}/>
-                </Button>
+                            <Button
+                                className="addBtn"
+                                onClick={() => handleAddButtonClick(item)}
+                                sx={{
+                                    height: '30px',
+                                    width: '30px',
+                                    padding: '0',
+                                    minWidth: '0',
+                                    marginRight: '9px',
+                                }}
+                            >
+                                <AddBoxRoundedIcon />
+                            </Button>
+                        </div>
+                    </Card>
+                ))}
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Button onClick={handlePreviousPage} disabled={currentPage === 0} >
+                        {' '}
+                        <ArrowBackIosNewIcon style={{fontSize:"16px"}}/>
+                    </Button>
 
-                <Button
-                    onClick={handleNextPage}
-                    disabled={currentPage === Math.ceil(filteredItems.length / itemsPerPage) - 1}
-                >
-                    <ArrowForwardIosIcon style={{fontSize:"16px"}}/>
-                </Button>
-                <TourModal isOpen={modalOpen} onClose={closeModal} contentid={selectedContentId} />
-            </div>
+                    <Button
+                        onClick={handleNextPage}
+                        disabled={currentPage === Math.ceil(filteredItems.length / itemsPerPage) - 1}
+                    >
+                        <ArrowForwardIosIcon style={{fontSize:"16px"}}/>
+                    </Button>
+                    <TourModal isOpen={modalOpen} onClose={closeModal} contentid={selectedContentId} />
+                </div>
         </>
     );
 }

@@ -1,5 +1,5 @@
 .gridContainer {
-    height: 900px;
+    height: 770px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -82,10 +82,7 @@ h3 {
 
 .planBtn {
     display: flex;
-    margin-top: 40px;
+    margin-top: 20px;
     justify-content: center;
-    position: absolute;
-    top:-15px;
-    right: 20px;
     z-index: 2;
 }

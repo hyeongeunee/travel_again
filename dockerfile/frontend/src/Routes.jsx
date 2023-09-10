@@ -5,6 +5,7 @@ import SignUp from './member/SignUp';
 import CreatePlanner from './plan/CreatePlanner';
 import App from './App';
 import DetailPage from './PlanDetail/DetailPage';
+import ScrollToTop from './util/ScrollTop';
 
 export default function RouteApp() {
     return (
@@ -16,6 +17,7 @@ export default function RouteApp() {
                 <Route path="/plan" element={<CreatePlanner />} />
                 <Route path="plan/detail" element={<DetailPage />} />
             </Routes>
+            <ScrollToTop />
         </Router>
     );
 }

@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 
 @Table(name = "TB_TOURLIST")
@@ -62,10 +61,8 @@ public class TourlistEntity {
     private String mapy;
 
     @Column(length = 10)
-    @ColumnDefault("0")
     private int recommendCount;
 
     @Column(length = 10)
-    @ColumnDefault("0")
     private int addCount;
 }

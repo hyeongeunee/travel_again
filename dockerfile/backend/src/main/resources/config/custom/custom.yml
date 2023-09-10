@@ -16,4 +16,4 @@ pageing:
   properties: A,B
 
 mockdir: /Users/ramachell/Documents/teamproject/travel_again/travel_again/dockerfile/backend/data
-tourlistDir: /Users/ramachell/Documents/teamproject/travel_again/dockerfile/backend/data
+tourlistDir: /Users/ramachell/Documents/teamproject/travel_again/dockerfile/backend/data/

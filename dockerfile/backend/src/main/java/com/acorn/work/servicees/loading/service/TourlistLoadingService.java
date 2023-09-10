@@ -1,10 +1,7 @@
 package com.acorn.work.servicees.loading.service;
 
-import com.acorn.core.customException.BizException;
-import com.acorn.work.dto.TourlistDTO;
-import com.acorn.work.entity.TourlistEntity;
-import com.acorn.work.mapstruct.TourlistMapper;
-import com.acorn.work.repository.TourlistRepository;
+import com.acorn.core.utils.JsonFileReadUtils;
+import com.acorn.core.utils.UuidUtils;
 import com.acorn.work.servicees.tour.doc.TourListDoc;
 import com.acorn.work.servicees.tour.dto.TourListEcDTO;
 import com.acorn.work.servicees.tour.mapper.EcMapper;
@@ -16,65 +13,33 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.Reader;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class TourlistLoadingService {
-
-
-
-    private final TourlistRepository tourlistRepository;
-    private final TourListDocRepository tourListDOCRepository;
-    private final Gson gson;
     @Value("${tourlistDir}")
     private String tourlistDir;
-
-    public void loadingTourlist(@NonNull String filename) {
-
-        Reader reader = fileLoad(filename);
-
-        List<TourlistDTO> tourlistdto =  gson.fromJson(reader,
-                new TypeToken<List<TourlistDTO>>(){}.getType() );
-
-        List<TourlistEntity> tourlistEntities = TourlistMapper.INSTANCE.toEntities(tourlistdto);
-
-        tourlistRepository.saveAll(tourlistEntities);
-
-    }
-
+    private final TourListDocRepository tourListDOCRepository;
+    private final Gson gson;
     public void loadingEcTourlist(@NonNull String filename) {
-
-        Reader reader = fileLoad(filename);
-        System.out.println(filename);
-
-        List<TourListEcDTO> tourlistEcDTOs =  gson.fromJson(reader,
+        Reader reader = JsonFileReadUtils.fileLoad(tourlistDir, filename);
+        List<TourListEcDTO> tourlistDTOs =  gson.fromJson(reader,
                 new TypeToken<List<TourListEcDTO>>(){}.getType() );
 
-        List<TourListDoc> tourListDocs = EcMapper.INSTANCE.toTourListDOCs(tourlistEcDTOs);
-        int i = 0;
+        List<TourListDoc> tourListDocs = EcMapper.INSTANCE.toTourListDOCs(tourlistDTOs);
+        int index = 0;
         for (TourListDoc tourListDoc : tourListDocs) {
+            index = index + 1;
+            tourListDoc.setTourListId(String.valueOf(index));
+            tourListDoc.setRecommendCount(UuidUtils.getRandom(300,50));
+            tourListDoc.setAddCount(UuidUtils.getRandomNext(100,20));
             tourListDOCRepository.save (tourListDoc);
-            i += 1;
-            if (i > 10 ) break;
+            //      i += 1;
+            //      if (i > 10 ) break;
         }
-
-
     }
 
-    private Reader fileLoad(String filename) {
-        Reader reader = null;
-        try {
-            System.out.println(this.tourlistDir);
-            reader = new FileReader( this.tourlistDir +"/"+ filename + ".json");
-        } catch (FileNotFoundException e) {
-            throw new BizException(filename + " 파일이 없습니다.");
-        }
-        return reader;
-    }
-
-
+    public void loadingTourlist(String filename) {}
 }

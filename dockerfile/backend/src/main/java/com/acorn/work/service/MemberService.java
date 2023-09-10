@@ -17,6 +17,9 @@ public class MemberService {
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     public String signup(MemberDTO memberDTO) {
 //        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+        if (memberRepository.existsByMemberId(memberDTO.getMemberId())){
+            return "아이디가 이미 존재합니다";
+        }
         memberRepository.save(MemberMapper.INSTANCE.toEntity(memberDTO));
         String memberNo = memberRepository.findByMemberId(memberDTO.getMemberId()).getMemberNo();
         return memberNo;
@@ -36,5 +39,9 @@ public class MemberService {
             return "login success id : " + memberEntityId.getMemberId();
         }
 
+    }
+
+    public Boolean checkId(String checkId) {
+        return memberRepository.existsByMemberId(checkId);
     }
 }

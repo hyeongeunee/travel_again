@@ -23,8 +23,8 @@ public class TourlistService {
     private final TourlistCustomRepositoryImpl tourlistCustomRepository;
 
     public ResponsePageDTO getTourlistPageOnAreacode(String areacode, Pageable pageable){
-        Page<TourlistEntity> tourlistEntityPage= tourlistRepository.findByAreacode(areacode,pageable);
-        System.out.println(tourlistEntityPage.getContent());
+        Page<TourlistEntity> tourlistEntityPage= tourlistRepository.findByAreacodeOrderByRecommendCountDesc(areacode,pageable);
+//        System.out.println(tourlistEntityPage.getContent());
         return ResponsePageDTO.setResponsePageDTO(tourlistEntityPage);
     }
 
@@ -69,5 +69,13 @@ public class TourlistService {
 
     public Page<TourlistDTO> findTourlistPage(TourlistConditionReqDTO tourlistConditionReqDTO, Pageable pageable){
         return  tourlistRepository.findTourlistPage(tourlistConditionReqDTO,pageable);
+    }
+
+    public List<TourlistDTO> getTourlistByRec(Pageable pageable){
+        return TourlistMapper.INSTANCE.toDTOs(tourlistRepository.findAllByOrderByRecommendCountDesc(pageable));
+    }
+
+    public List<TourlistDTO> getTourlistByAdd(Pageable pageable) {
+        return TourlistMapper.INSTANCE.toDTOs(tourlistRepository.findAllByOrderByAddCountDesc(pageable));
     }
 }
