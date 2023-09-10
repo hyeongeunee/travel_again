@@ -65,7 +65,10 @@ export default function OutLineForm() {
             selectedItems={selectedItems} 
             day={day}
             areaData={areaData} />
-          <MapContent day={day} />
+          <MapContent 
+            day={day} 
+            selectedItems={selectedItems} 
+            areaData={areaData}/>
         </Grid>
       </Grid>
     </>

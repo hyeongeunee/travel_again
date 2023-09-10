@@ -5,7 +5,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import BigMapItem from "../asset/BigMapItem";
 
-export default function BigMap(){
+export default function BigMap({ selectedItems, areaData, day }){
     return(
         <>
           <div className="map-header">
@@ -19,7 +19,10 @@ export default function BigMap(){
         </div>
         <div>
           {/* 지도 */}
-          <BigMapItem/>
+          <BigMapItem 
+            selectedItems={selectedItems} 
+            day={day}
+            areaData={areaData}/>
         </div>
       </>
     )

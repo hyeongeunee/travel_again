@@ -22,6 +22,7 @@ function CreatePlanner() {
   const [endDate, setEndDate] = useState(0);
   const [datesArray, setDatesArray] = useState(0);
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [realModal, setRealModal] = React.useState(false);
   const location = useLocation();
   //console.log(location);
   const areaData = location.state ? location.state.areaData : null;
@@ -82,12 +83,24 @@ function CreatePlanner() {
     }
   };
   console.log(datesArray);
+
+  const realModalOpen = () => {
+    setRealModal(true);
+  };
+
+  const realModalClose = () => {
+      setRealModal(false);
+  };
+
   return (
     <>
       <div className="plan-header">
         <p className="kor-title">{areaData.korTitle}</p>
         <p className="eng-title">{areaData.engTitle}</p>
       </div>
+      <Button className="realTimeBtn" onClick={realModalOpen}>
+        실시간 인기검색어
+      </Button>
       <div className="TestContainer">
         <Grid container className="gridContainer">
           <Grid item className="leftbar" xs={12} sm={2}>
@@ -105,10 +118,6 @@ function CreatePlanner() {
               setSelectedIndex={setSelectedIndex}
             />
           </Grid>
-         
-            
-           
-
           <DateAlert dateLength={dateLength} />
 
           <Grid item className="maparea" xs={12} sm={8}>

@@ -11,7 +11,7 @@ const TourModal = ({ isOpen, onClose, contentid }) => {
     useEffect(() => {
         if (contentRef.current) {
             const contentElement = contentRef.current;
-            // 컨텐츠 높이가 140px 이상인 경우에만 "더보기" 표시
+            // 컨텐츠 높이가 100px 이상인 경우에만 "더보기" 표시
             if (contentElement.clientHeight < contentElement.scrollHeight) {
                 setContentHeight('100px');
             }

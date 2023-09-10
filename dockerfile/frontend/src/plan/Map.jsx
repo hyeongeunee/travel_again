@@ -107,6 +107,7 @@ function Map({ selectedItems, areaData }) {
   return (
     <div
       id="map"
+      className='planner-map'
       style={{
         width: '100%',
         height: '750px',
