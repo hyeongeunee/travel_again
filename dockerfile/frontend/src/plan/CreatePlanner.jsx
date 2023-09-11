@@ -108,7 +108,7 @@ function CreatePlanner() {
               datesArray={datesArray}
             />
             <Divider>
-              <h3>선택된 여행지</h3>
+              <h3 className="choicedList">선택된 여행지</h3>
             </Divider>
             <DateAccordion
               dateLength={dateLength}

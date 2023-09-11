@@ -16,6 +16,8 @@ export default function RouteApp() {
     const containerStyle = {
         backgroundColor: theme.background_color,
         color: theme.text_color,
+        transitionProperty: 'background-color, color',
+        transitionDuration: '1.5s',
     };
 
     return (

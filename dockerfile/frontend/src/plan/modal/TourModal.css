@@ -17,7 +17,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     max-width: 100%;
     width: 580px;
-    height: 580px;
+    height: 600px;
 }
 
 .tour-modal-header {
@@ -38,7 +38,7 @@
 .tour-modal-content {
     max-height: 100px;
     overflow: auto; /* 내용을 넘어가는 부분은 숨깁니다. */
-    transition: max-height 3s ease-in-out; 
+    transition: max-height 3s ease-in-out;
     padding: 10px;
 }
 
@@ -107,3 +107,7 @@
     float: right;
 }
 
+.tour-modal-btn {
+    text-align: center;
+    margin-top: 10px;
+}

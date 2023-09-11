@@ -50,7 +50,7 @@ export default function Main() {
                     width: firstBoxWidth,
                 }}
             >
-                <img src="/10.gif" alt="a" style={{ width: '100%', height: '100%' }} />
+                <img src="/10.gif" alt="a" style={{ width: '100%', height: '100%', borderRadius: '10px' }} />
             </Box>
             <Box
                 className="second-box"
