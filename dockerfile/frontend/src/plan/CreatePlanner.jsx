@@ -12,7 +12,7 @@ import ko from "date-fns/locale/ko";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import PlanCard from "./PlanCard";
 import PlanSearchBar from "./PlanSearchBar";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 
 function CreatePlanner() {
   const [dateLength, setDateLength] = useState(0);
@@ -22,7 +22,6 @@ function CreatePlanner() {
   const [endDate, setEndDate] = useState(0);
   const [datesArray, setDatesArray] = useState(0);
   const [openDrawer, setOpenDrawer] = React.useState(false);
-  const [realModal, setRealModal] = React.useState(false);
   const location = useLocation();
   //console.log(location);
   const areaData = location.state ? location.state.areaData : null;
@@ -61,7 +60,16 @@ function CreatePlanner() {
     return obj;
   };
 
-  const sendData = async () => {
+  const sendData = async (e) => {
+    if (
+      !selectedItems ||
+      selectedItems.length === 0 ||
+      !datesArray ||
+      datesArray.length === 0
+    ) {
+      return;
+    }
+
     const arr = convertDay(selectedItems);
     try {
       const dataToSend = {
@@ -84,23 +92,12 @@ function CreatePlanner() {
   };
   console.log(datesArray);
 
-  const realModalOpen = () => {
-    setRealModal(true);
-  };
-
-  const realModalClose = () => {
-      setRealModal(false);
-  };
-
   return (
     <>
       <div className="plan-header">
         <p className="kor-title">{areaData.korTitle}</p>
         <p className="eng-title">{areaData.engTitle}</p>
       </div>
-      <Button className="realTimeBtn" onClick={realModalOpen}>
-        실시간 인기검색어
-      </Button>
       <div className="TestContainer">
         <Grid container className="gridContainer">
           <Grid item className="leftbar" xs={12} sm={2}>
@@ -110,7 +107,9 @@ function CreatePlanner() {
               checkingEDate={checkingEDate}
               datesArray={datesArray}
             />
-            <Divider><h3>선택된 여행지</h3></Divider>
+            <Divider>
+              <h3>선택된 여행지</h3>
+            </Divider>
             <DateAccordion
               dateLength={dateLength}
               setSelectedItems={setSelectedItems}
@@ -118,14 +117,14 @@ function CreatePlanner() {
               setSelectedIndex={setSelectedIndex}
             />
           </Grid>
+
           <DateAlert dateLength={dateLength} />
 
           <Grid item className="maparea" xs={12} sm={8}>
             <Map selectedItems={selectedItems} areaData={areaData} />
           </Grid>
           <Grid item className="rightbar" xs={12} sm={2}>
-         
-            <PlanSearchBar/>
+            <PlanSearchBar />
             <PlanCard
               selectedItems={selectedItems}
               setSelectedItems={setSelectedItems}
@@ -145,12 +144,29 @@ function CreatePlanner() {
             endDate: formattedEndDate,
             datesArray: datesArray,
           }}
+          onClick={(e) => {
+            if (
+              !selectedItems ||
+              selectedItems.length === 0 ||
+              !datesArray ||
+              datesArray.length === 0
+            ) {
+              e.preventDefault(); // 라우팅 방지
+            }
+            sendData(e); // sendData 함수 호출
+          }}
         >
           <Button
             variant="contained"
             sx={{ backgroundColor: "#8181F7" }}
-            onClick={sendData}
+           
             size="large"
+            disabled={
+              !selectedItems ||
+              selectedItems.length === 0 ||
+              !datesArray ||
+              datesArray.length === 0
+            }
           >
             일정 생성하기 <KeyboardArrowRightIcon />
           </Button>

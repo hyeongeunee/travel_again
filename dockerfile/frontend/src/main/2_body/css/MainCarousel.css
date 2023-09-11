@@ -1,4 +1,8 @@
 .carousel{
+   margin: 0%;
+}
 
-    z-index: -2;
+.carousel-list{
+    display: flex;
+    justify-content: space-evenly;
 }

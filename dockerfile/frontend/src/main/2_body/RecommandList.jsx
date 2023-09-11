@@ -3,7 +3,7 @@ import './css/recommendList.css'
 function RecommendList() {
     return(
         <div className="rec_container">
-            <h2>추천 여행지입니당</h2>
+            <h2>Travel Again 에서 추천하는 관광지</h2>
         </div>
     );
 }

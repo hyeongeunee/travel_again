@@ -26,7 +26,7 @@ export default function AppendCard({ selectedItems, setSelectedItems }) {
           sx={{
             display: "flex",
             width: "auto",
-            height: "60px",
+            height: "100px",
             flexDirection: "row",
             alignItems: "center",
             marginBottom: "8px",
@@ -35,8 +35,8 @@ export default function AppendCard({ selectedItems, setSelectedItems }) {
           <CardMedia
             component="img"
             sx={{
-              width: 40,
-              height: 40,
+              width: 70,
+              height: 70,
               flexGrow: "1",
               borderRadius: "5px",
               marginLeft: "10px",
@@ -55,7 +55,22 @@ export default function AppendCard({ selectedItems, setSelectedItems }) {
             >
               {textOverCut(item.title, 10.8, "...")}
             </Typography>
-            
+            <Typography variant="div">
+              <span
+                style={{
+                  fontSize: "1px",
+                  fontWeight: "bolder",
+                  color: "skyblue",
+                  marginTop: "-2",
+                }}
+              >
+                도로명
+              </span>
+              <Typography variant="h6" sx={{ fontSize: 8.3 }}>
+                {textOverCut(item.addr1, 15, "...")}
+              </Typography>
+            </Typography>
+
             <div>
               <FavoriteIcon sx={{ fontSize: 13, color: "#F44336" }} />
               <StarIcon sx={{ fontSize: 14, color: "#FBC02D" }} />
