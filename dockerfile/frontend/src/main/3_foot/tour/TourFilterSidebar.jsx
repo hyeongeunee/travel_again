@@ -46,13 +46,13 @@ export const FILTER_PRICE_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-ShopFilterSidebar.propTypes = {
+TourFilterSidebar.propTypes = {
   openFilter: PropTypes.bool,
   onOpenFilter: PropTypes.func,
   onCloseFilter: PropTypes.func,
 };
 
-export default function ShopFilterSidebar({
+export default function TourFilterSidebar({
   openFilter,
   onOpenFilter,
   onCloseFilter,
@@ -160,4 +160,4 @@ export default function ShopFilterSidebar({
     </>
   );
 }
-export { default as ProductFilterSidebar } from "./TourFilterSidebar";
+export { default as TourFilterSideBar } from "./TourFilterSidebar";

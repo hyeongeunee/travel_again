@@ -1,17 +1,14 @@
 import { useState } from "react";
-// @mui
 import { Container, Stack } from "@mui/material";
-// components
 import TourSort from "./TourSort";
 import TourList from "./TourList";
 import TourFilterSidebar from "./TourFilterSidebar";
-// mock
-import tourjson from "../../../utils/trip.json"
-
-// ----------------------------------------------------------------------
+import tourjson from "../../../utils/trip.json";
 
 export default function TourListPage() {
   const [openFilter, setOpenFilter] = useState(false);
+  const [sortedTourArray, setSortedTourArray] = useState([...tourjson]); // 원본 배열 복사
+  const [sortBy, setSortBy] = useState(null); // 정렬 기준
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -19,6 +16,30 @@ export default function TourListPage() {
 
   const handleCloseFilter = () => {
     setOpenFilter(false);
+  };
+
+  // 정렬 함수
+  const sortData = (sortBy) => {
+    const sortedArray = [...sortedTourArray];
+    if (sortBy === "english") {
+      // 이름으로 정렬 (여기에서는 engTitle 사용)
+      sortedArray.sort((a, b) => {
+        const nameA = a.engTitle.toLowerCase();
+        const nameB = b.engTitle.toLowerCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    } else if (sortBy === "like") {
+      // 좋아요 수로 정렬
+      sortedArray.sort((a, b) => b.likeCount - a.likeCount);
+    }
+    setSortedTourArray(sortedArray);
+    setSortBy(sortBy);
   };
 
   return (
@@ -37,10 +58,10 @@ export default function TourListPage() {
               onOpenFilter={handleOpenFilter}
               onCloseFilter={handleCloseFilter}
             />
-            <TourSort />
+            <TourSort onSortByChange={sortData} currentSort={sortBy} />
           </Stack>
         </Stack>
-        <TourList tourArray={tourjson} />
+        <TourList tourArray={sortedTourArray} />
       </Container>
     </>
   );

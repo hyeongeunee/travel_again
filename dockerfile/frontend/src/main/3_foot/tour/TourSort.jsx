@@ -2,14 +2,12 @@ import { useState } from "react";
 import { Menu, Button, MenuItem, Typography } from "@mui/material";
 
 const SORT_BY_OPTIONS = [
-  { value: "hanguel", label: "이름순" },
+  { value: "english", label: "이름순" },
   { value: "like", label: "좋아요순" },
-  { value: "view", label: "조회수순" },
 ];
 
-export default function ShopProductSort() {
+export default function TourSort({ onSortByChange, currentSort }) {
   const [open, setOpen] = useState(null);
-  const [selectedOption, setSelectedOption] = useState(SORT_BY_OPTIONS[1]); // 초기 값 설정
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -20,7 +18,8 @@ export default function ShopProductSort() {
   };
 
   const handleOptionClick = (option) => {
-    setSelectedOption(option); // 사용자가 옵션을 선택할 때마다 선택한 값을 저장
+    // 선택한 정렬 기준을 부모 컴포넌트로 전달
+    onSortByChange(option.value);
     handleClose();
   };
 
@@ -33,7 +32,7 @@ export default function ShopProductSort() {
           variant="subtitle2"
           sx={{ color: "text.secondary" }}
         >
-          {selectedOption.label}
+          {currentSort === "english" ? "이름순" : "좋아요순"}
         </Typography>
       </Button>
       <Menu
@@ -47,7 +46,7 @@ export default function ShopProductSort() {
         {SORT_BY_OPTIONS.map((option) => (
           <MenuItem
             key={option.value}
-            selected={option.value === selectedOption.value}
+            selected={option.value === currentSort}
             onClick={() => handleOptionClick(option)}
             sx={{ typography: "body2" }}
           >
