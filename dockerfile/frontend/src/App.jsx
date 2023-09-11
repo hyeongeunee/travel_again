@@ -16,7 +16,6 @@ function App() {
             {/* <Carousel/> */}
             <RecommendList />
             <MainCarousel />
-            <WhereToGo />
             <TourListPage />
             <PlanDrawer />
         </>

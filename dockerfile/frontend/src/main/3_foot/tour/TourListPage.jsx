@@ -1,14 +1,17 @@
-import { useState } from "react";
+// TourListPage.js
+import React, { useState } from "react";
 import { Container, Stack } from "@mui/material";
 import TourSort from "./TourSort";
 import TourList from "./TourList";
 import TourFilterSidebar from "./TourFilterSidebar";
 import tourjson from "../../../utils/trip.json";
+import WhereToGo from "../WhereToGo";
 
 export default function TourListPage() {
   const [openFilter, setOpenFilter] = useState(false);
   const [sortedTourArray, setSortedTourArray] = useState([...tourjson]); // 원본 배열 복사
   const [sortBy, setSortBy] = useState(null); // 정렬 기준
+  const [searchKeyword, setSearchKeyword] = useState(""); // 검색어 상태 추가
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -42,9 +45,21 @@ export default function TourListPage() {
     setSortBy(sortBy);
   };
 
+  const searchTour = (keyword) => {
+    const lowerKeyword = keyword.toLowerCase();
+    // 검색어에 따라 아이템 필터링
+    const filteredArray = tourjson.filter((item) =>
+    item.korTitle.toLowerCase().includes(lowerKeyword) ||
+    item.engTitle.toLowerCase().includes(lowerKeyword)
+  );
+  setSortedTourArray(filteredArray);
+  setSearchKeyword(keyword);
+}
+
   return (
     <>
       <Container>
+        <WhereToGo onSearch={searchTour} />
         <Stack
           direction="row"
           flexWrap="wrap-reverse"
@@ -61,6 +76,7 @@ export default function TourListPage() {
             <TourSort onSortByChange={sortData} currentSort={sortBy} />
           </Stack>
         </Stack>
+
         <TourList tourArray={sortedTourArray} />
       </Container>
     </>
