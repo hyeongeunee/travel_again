@@ -46,15 +46,18 @@ export default function TourListPage() {
   };
 
   const searchTour = (keyword) => {
+    // 검색어를 소문자로 변환
     const lowerKeyword = keyword.toLowerCase();
+  
     // 검색어에 따라 아이템 필터링
     const filteredArray = tourjson.filter((item) =>
-    item.korTitle.toLowerCase().includes(lowerKeyword) ||
-    item.engTitle.toLowerCase().includes(lowerKeyword)
-  );
-  setSortedTourArray(filteredArray);
-  setSearchKeyword(keyword);
-}
+      item.korTitle.toLowerCase().includes(lowerKeyword) ||
+      item.engTitle.toLowerCase().includes(lowerKeyword)
+    );
+    setSortedTourArray(filteredArray);
+    setSearchKeyword(keyword);
+  }
+  
 
   return (
     <>

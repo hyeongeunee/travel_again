@@ -1,42 +1,31 @@
+// WhereToGo.js
+import React, { useState } from "react";
 import "./whereToGo.css";
-import * as React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import { Divider, InputBase, Paper } from "@mui/material";
-import axios from 'axios';
 
-function WhereToGo() {
+function WhereToGo({ onSearch }) {
+  const [keyword, setKeyword] = useState("");
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        // ------------ 나중에 서버랑 연결할 때 주석제거하기 ---------------------------
-        const data = new FormData(event.currentTarget);
-        const category = data.get('category')
-        const keyword = data.get('keyword')
-        const url = 'http://localhost:9000/tourlist/es/overview?searchValue=' + keyword 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSearch(keyword); // 검색어를 상위 컴포넌트로 전달
+  };
 
-        try {
-            const response = await axios.post(url, {
-                
-                
-            }); 
-            console.log('서버 응답:', response.data);
-        } catch (error) {
-            console.error('오류:', error);
-        }
-    };
-    return (
-        <div className="wtg-container">
-        <h2>어디로 여행을 떠나시나요?</h2>
-        <div className="searchBar-grid">
+  return (
+    <div className="wtg-container">
+      <h2>어디로 여행을 떠나시나요?</h2>
+      <div className="searchBar-grid">
         <Paper
           className="searchBar-container"
           component="form"
+          onSubmit={handleSubmit} // 폼 제출 이벤트 핸들러 연결
           sx={{
             p: "2px 4px",
             display: "flex",
-            borderRadius:"20px",
-            boxShadow:" 0 4px 6px rgba(0,0,0,0.30)"
+            borderRadius: "20px",
+            boxShadow: "0 4px 6px rgba(0,0,0,0.30)",
           }}
         >
           <InputBase
@@ -46,14 +35,16 @@ function WhereToGo() {
             inputProps={{ "aria-label": "#" }}
             name="keyword"
             type="search"
+            value={keyword} // 검색어 입력값을 상태에 연결
+            onChange={(e) => setKeyword(e.target.value)} // 검색어 변경 이벤트 핸들러
           />
-          <IconButton type="button" sx={{ p: "10px"}} aria-label="search">
-            <SearchIcon style={{fontSize:"37px"}} type="submit"/>
+          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+            <SearchIcon style={{ fontSize: "37px" }} />
           </IconButton>
         </Paper>
-        </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default WhereToGo;

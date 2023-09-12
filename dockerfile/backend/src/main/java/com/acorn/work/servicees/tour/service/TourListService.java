@@ -25,11 +25,17 @@ import java.util.Optional;
 public class TourListService {
 
     private final TourListDocRepository tourListDocRepository;
+    private final WordSearchService wordSearchService;
 //    private final SearchDocRepository searchDocRepository;
 
     // 테스트용
     public List<TourListEcDTO> getTourList() {
         List<TourListDoc> tourListDocs = tourListDocRepository.findAll();
+        return EcMapper.INSTANCE.toTourListEcDTOs(tourListDocs);
+    }
+
+    public List<TourListEcDTO> getTourList2() {
+        List<TourListDoc> tourListDocs = tourListDocRepository.findByOrderByTitleDesc();
         return EcMapper.INSTANCE.toTourListEcDTOs(tourListDocs);
     }
 
@@ -65,6 +71,7 @@ public class TourListService {
 
 
     public ResponsePageDTO getTourList(String searchValue,Pageable pageable) {
+        wordSearchService.saveWordSearch(searchValue);
         Page<TourListDoc> tourListDocPage = tourListDocRepository.findByTitleOrOverviewOrAddr1(searchValue,searchValue,searchValue,pageable
         );
         return ResponsePageDTO.setResponsePageDTO(tourListDocPage);
@@ -75,14 +82,14 @@ public class TourListService {
 
     }
 
-    public List<TourListDoc> getTourlistByAddCount() {
+    public List<TourListDoc> getTourlistByAddCount(String areacode) {
         Pageable pageable = PageRequest.of(0,5);
         return tourListDocRepository.findByOrderByAddCountDesc(pageable);
     }
 
-    public List<TourListDoc> getTourlistByRecommendCount() {
+    public List<TourListDoc> getTourlistByRecommendCount(String areacode) {
         Pageable pageable = PageRequest.of(0,5);
-        return tourListDocRepository.findByOrderByRecommendCountDesc(pageable);
+        return tourListDocRepository.findByAreacodeOrderByRecommendCountDesc(areacode,pageable);
 
     }
 

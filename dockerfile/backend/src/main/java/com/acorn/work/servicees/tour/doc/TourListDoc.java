@@ -30,12 +30,12 @@ public class TourListDoc {
     private String cat2;
     private String cat3;
 
-    @Field(type = FieldType.Text, analyzer = "nori")
+    @Field(type = FieldType.Text, analyzer = "nori",fielddata = true)
     private String title;
 
     private String zipcode;
 
-    @Field(type = FieldType.Text, analyzer = "nori")
+    @Field(type = FieldType.Text, analyzer = "nori" ,fielddata = true)
     private String addr1;
 
     @Field(type = FieldType.Text, analyzer = "nori")
@@ -48,7 +48,7 @@ public class TourListDoc {
     private String firstimage;
     private String firstimage2;
 
-    @Field(type = FieldType.Text, analyzer = "nori")
+    @Field(type = FieldType.Text, analyzer = "nori",fielddata = true)
     private String overview;
 
     private String booktour;

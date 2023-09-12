@@ -67,12 +67,21 @@ public class TourListController {
     }
 
     @PostMapping("/es/addCountDesc")
-    public ResponseEntity findByTourlistOrderByAddCountDesc() {
-        return ResponseUtils.completed(tourListService.getTourlistByAddCount());
+    public ResponseEntity findByTourlistOrderByAddCountDesc(@PathVariable String areaData) {
+
+        return ResponseUtils.completed(tourListService.getTourlistByAddCount(areaData));
     }
 
-    @PostMapping("/es/recommendCountDesc")
-    public ResponseEntity findByTourlistOrderByRecommemdCountDesc(){
-        return ResponseUtils.completed(tourListService.getTourlistByRecommendCount());
+    @PostMapping("/es/recommendCountDesc/{areaData}")
+    public ResponseEntity findByTourlistOrderByRecommemdCountDesc(@PathVariable String areaData){
+//        System.out.println(areaData);
+        return ResponseUtils.completed(tourListService.getTourlistByRecommendCount(areaData));
     }
+
+//    @PostMapping("/es/addCountDesc")
+//    public ResponseEntity findByTourlistOrderByRecommendCountDesc(@PathVariable String areaData) {
+//
+//        return ResponseUtils.completed(tourListService.getTourlistByRecommendCount(areaData));
+//    }
+
 }

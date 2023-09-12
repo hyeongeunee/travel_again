@@ -9,21 +9,20 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "searchValue")
+@Document(indexName = "wordsearch")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Builder
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class SearchDoc {
+public class WordSearchDoc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String searchValueId;
+    private String wordSearchId;
 
-    @Field(type = FieldType.Text, analyzer = "nori")
-    private String word;
+    @Field(type = FieldType.Text, analyzer = "nori", fielddata = true)
+    private String words;
 
 }
-

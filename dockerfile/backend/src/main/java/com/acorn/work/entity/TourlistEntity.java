@@ -42,10 +42,10 @@ public class TourlistEntity {
     @Column(length = 5)
     private String mlevel;
 
-    @Column(length = 5)
+    @Column(length = 4)
     private String areacode;
 
-    @Column(length = 5)
+    @Column(length = 4)
     private String sigungucode;
 
     @Column(length = 500)
