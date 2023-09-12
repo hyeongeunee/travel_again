@@ -75,6 +75,7 @@ function BigMapItem({ selectedItems, areaData, day }) {
             style={{
                 width: 'auto',
                 height: '600px',
+                marginBottom:"120px"
             }}
         ></div>
     );

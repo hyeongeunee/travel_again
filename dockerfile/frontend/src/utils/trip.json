@@ -8,7 +8,9 @@
         "mapx": 127.03169,
         "mapy": 37.4987464,
         "mlevel": 9,
-        "likeCount" : 542
+        "likeCount" : 542,
+        "bookMarkCount": 261
+
     },
     {
         "locimages": "/locimages/INCHEON.jpg",
@@ -19,7 +21,8 @@
         "mapx": 126.573234,
         "mapy": 37.469221,
         "mlevel": 10,
-        "likeCount" :126
+        "likeCount" :126,
+        "bookMarkCount": 78
         
     },
     {
@@ -31,7 +34,8 @@
         "mapx": 127.378953,
         "mapy": 36.321655,
         "mlevel": 9,
-        "likeCount" :98
+        "likeCount" :98,
+        "bookMarkCount": 48
     },
     {
         "locimages": "/locimages/DAEGU.jpg",
@@ -42,7 +46,8 @@
         "mapx": 128.5475492,
         "mapy": 35.8476417,
         "mlevel": 8,
-        "likeCount" :119
+        "likeCount" :119,
+        "bookMarkCount": 86
     },
     {
         "locimages": "/locimages/BUSAN.jpg",
@@ -53,7 +58,8 @@
         "mapx": 129.053922,
         "mapy": 35.198362,
         "mlevel": 8,
-        "likeCount" :382
+        "likeCount" :382,
+        "bookMarkCount": 149
     },
     {
         "locimages": "/locimages/GYEONGGI.jpg",
@@ -64,7 +70,8 @@
         "mapx": 127.190292,
         "mapy": 37.567167,
         "mlevel": 11,
-        "likeCount" :273
+        "likeCount" :273,
+        "bookMarkCount": 137
     },
     {
         "locimages": "/locimages/GANGWON.jpg",
@@ -75,7 +82,8 @@
         "mapx": 128.209315,
         "mapy": 37.555837,
         "mlevel": 10,
-        "likeCount" :315
+        "likeCount" :315,
+        "bookMarkCount": 117
     },
     {
         "locimages": "/locimages/CHUNGBUK.jpg",
@@ -86,7 +94,8 @@
         "mapx": 127.929344,
         "mapy": 36.628503,
         "mlevel": 10,
-        "likeCount" :169
+        "likeCount" :169,
+        "bookMarkCount": 55
     },
     {
         "locimages": "/locimages/GYEONGBUK.jpg",
@@ -97,7 +106,8 @@
         "mapx": 128.664734,
         "mapy": 36.248647,
         "mlevel": 10,
-        "likeCount" :249
+        "likeCount" :249,
+        "bookMarkCount": 95
     },
     {
         "locimages": "/locimages/GYOENGNAM.jpg",
@@ -108,7 +118,8 @@
         "mapx": 128.664734,
         "mapy": 35.259787,
         "mlevel": 10,
-        "likeCount" :109
+        "likeCount" :109,
+        "bookMarkCount": 38
     },
     {
         "locimages": "/locimages/JEONBUK.jpg",
@@ -119,7 +130,8 @@
         "mapx": 127.144185,
         "mapy": 35.716705,
         "mlevel": 10,
-        "likeCount" :239
+        "likeCount" :239,
+        "bookMarkCount": 73
     },
     {
         "locimages": "/locimages/JEONNAM.jpg",
@@ -130,7 +142,8 @@
         "mapx": 126.893113,
         "mapy": 34.8194,
         "mlevel": 10,
-        "likeCount" : 134
+        "likeCount" : 134,
+        "bookMarkCount": 23
     },
     {
         "locimages": "/locimages/JEJU.jpg",
@@ -141,6 +154,7 @@
         "mapx": 126.542671,
         "mapy": 33.364805,
         "mlevel": 9,
-        "likeCount" :454
+        "likeCount" :454,
+        "bookMarkCount": 394
     }
 ]

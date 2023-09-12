@@ -11,6 +11,11 @@
     z-index: 1;
 }
 
+.modal-icon-container{
+    display: flex;
+    
+}
+
 .modal {
     background-color: white;
     padding: 30px;
@@ -67,8 +72,13 @@
 
 .modal-icon {
     display: flex;
-    justify-content: space-around;
     margin-top: 5px;
+}
+
+.modal-likeCount{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .modal-image {
