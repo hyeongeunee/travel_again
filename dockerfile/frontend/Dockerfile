@@ -1,28 +1,33 @@
-
+# Stage 1: Build the React application
 FROM node:14 as build
 
-# 작업 디렉토리 
+# Set the working directory
 WORKDIR /app
 
-# 프론트엔드 소스 코드 
-COPY frontend/package*.json ./
+# Copy package.json and package-lock.json to install dependencies
+COPY package*.json ./
 RUN npm install
-COPY frontend/ ./
 
-# 빌드
+# Copy the rest of the frontend application
+COPY . .
+
+# Build the frontend application
 RUN npm run build
 
+# Stage 2: Serve the application using a simple HTTP server
+FROM node:14
 
-FROM nginx:1.21
+# Set the working directory
+WORKDIR /app
 
-# Nginx 설정 복사
-COPY nginx-conf/nginx.conf /etc/nginx/conf.d/default.conf
+# Copy the built frontend files from the build stage
+COPY --from=build /app/build ./public
 
-# 빌드된 프론트엔드 파일 복사
-COPY --from=build /app/build /usr/share/nginx/html
-
-# 포트 열기
+# Expose port 80 (you can change this if needed)
 EXPOSE 80
 
-# Nginx 실행
-CMD ["nginx", "-g", "daemon off;"]
+# Install a simple HTTP server to serve the static files
+RUN npm install -g http-server
+
+# Start the HTTP server to serve the static files
+CMD ["http-server", "-p", "80", "public"]
