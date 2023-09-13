@@ -3,6 +3,7 @@ package com.acorn.example.requrstandresponse.websocketStomp.controller;
 import com.acorn.example.requrstandresponse.websocketStomp.message.GreetingMessag;
 import com.acorn.example.requrstandresponse.websocketStomp.message.HelloMessage;
 import com.acorn.work.servicees.tour.service.WordSearchService;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -10,7 +11,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.HtmlUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,24 +32,27 @@ public class controller {
   @SendTo("/topic/message2")
   public GreetingMessag connect(HelloMessage message) throws Exception {
     Thread.sleep(1000); // simulated delay
+    Gson gson = new Gson();
     return GreetingMessag.builder()
-            .content("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!").build();
-
+//            .content("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!").build();
+            .content(gson.toJson(wordSearchService.comparisonWord())).build();
   }
 
 
-  @Scheduled(cron = "0/15 * * * * *" )
+  @Scheduled(cron = "0/10 * * * * *" )
   public void sendMsg() throws Exception{
+    System.out.println("스케쥴");
 //    GreetingMessag greetingMessag = GreetingMessag.builder()
 //            .content("[메세지]" + UuidUtils.getUUID() + " ..... !").build();
+    Gson gson = new Gson();
 
     GreetingMessag greetingMessag = GreetingMessag.builder()
-            .content(wordSearchService.getTopTags("wordsearch",10).toString()).build();
+            .content(gson.toJson(wordSearchService.comparisonWord())).build();
 
     log.debug("cron 15초 이후 실행.. "
             + Thread.currentThread().getName() + " : "
             + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd'T'HH:mm:ss")));
 
-    template.convertAndSend("/topic/message", greetingMessag);
+    template.convertAndSend("/topic/message2", greetingMessag);
   }
 }

@@ -45,6 +45,7 @@ public class TourListEcDTO {
     private String mapy;
     private int recommendCount;
     private int addCount;
+    private float rating;
 
     private String createdtime;
     private String cpyrhtDivCd;

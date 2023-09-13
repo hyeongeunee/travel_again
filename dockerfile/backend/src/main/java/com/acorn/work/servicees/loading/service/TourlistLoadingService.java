@@ -33,8 +33,15 @@ public class TourlistLoadingService {
         for (TourListDoc tourListDoc : tourListDocs) {
             index = index + 1;
             tourListDoc.setTourListId(String.valueOf(index));
-            tourListDoc.setRecommendCount(UuidUtils.getRandom(300,50));
-            tourListDoc.setAddCount(UuidUtils.getRandomNext(100,20));
+            if(index%100==0) {
+                tourListDoc.setRecommendCount(UuidUtils.getRandomNext(4000, 2000));
+                tourListDoc.setAddCount(UuidUtils.getRandomNext(2000, 1000));
+            } else {
+                tourListDoc.setRecommendCount(UuidUtils.getRandomNext(2000, 100));
+                tourListDoc.setAddCount(UuidUtils.getRandomNext(1000, 100));
+            }
+
+            tourListDoc.setRating((float) UuidUtils.getRandomNext(48, 25)/10);
             tourListDOCRepository.save (tourListDoc);
             //      i += 1;
             //      if (i > 10 ) break;

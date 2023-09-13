@@ -24,13 +24,11 @@ public class WordSearchController {
     @GetMapping("/getTags/{fieldname}/{size}")
     public ResponseEntity saveWordSearch(@PathVariable String fieldname,
                                          @PathVariable int size) throws IOException {
-//        System.out.println(fieldname + " ||| " + size);
         return ResponseUtils.completed(wordSearchService.getTopTags(fieldname, size));
     }
 
     @GetMapping("/savedb")
     public ResponseEntity saveWordSearchDTO () throws IOException{
-        System.out.println("여기까진됨??1");
         wordSearchService.saveWordCount();
         return ResponseUtils.completed("ok");
     }
@@ -38,6 +36,7 @@ public class WordSearchController {
     @GetMapping("/comp")
     public ResponseEntity comparisonCount() throws IOException{
         return ResponseUtils.completed(wordSearchService.comparisonWord());
+
     }
 
 }

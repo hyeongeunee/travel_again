@@ -14,5 +14,5 @@ public class WordSearchRspDTO {
 
     private String word;
     private int cnt;
-    private int no;
+    private String no;
 }

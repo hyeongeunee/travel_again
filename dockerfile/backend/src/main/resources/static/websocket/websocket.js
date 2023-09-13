@@ -49,7 +49,15 @@ function sendName() {
 }
 
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    const row = JSON.parse(message);
+    $("#greetings").text("");
+
+    for ( let i = 0 ; i < row.length ; i ++){
+    $("#greetings").append("<tr><td>" + row[i]["word"] + "|" + row[i]["cnt"]+ "|" + row[i]["no"]  + "</td></tr>")
+    }
+    console.log("웹소켓 으로 받은 메시지 : " + message);
+
+    console.log(row);
 }
 
 $(function () {

@@ -21,9 +21,14 @@ public class TourListController {
         return ResponseUtils.completed(tourListService.getTourList());
     }
 
-    @PostMapping("/es/search")
+    @RequestMapping("/es/search")
     public ResponseEntity searchlist(@RequestParam("searchValue") String searchValue,Pageable pageable){
         return ResponseUtils.completed(tourListService.getTourList(searchValue,pageable));
+    }
+
+    @RequestMapping("/es/search/{areacode}")
+    public ResponseEntity searchlistByAreacode(@RequestParam("searchValue") String searchValue,@PathVariable String areacode, Pageable pageable){
+        return ResponseUtils.completed(tourListService.getTourListByAreacode(searchValue,areacode,pageable));
     }
 
     @PostMapping("/es/title")
@@ -66,13 +71,28 @@ public class TourListController {
         return ResponseUtils.completed(tourListService.updateCount());
     }
 
-    @PostMapping("/es/addCountDesc")
-    public ResponseEntity findByTourlistOrderByAddCountDesc(@PathVariable String areaData) {
-
-        return ResponseUtils.completed(tourListService.getTourlistByAddCount(areaData));
+    @PostMapping("/es/addCountDesc/all")
+    public ResponseEntity findByTourlistOrderByAddCountDesc() {
+        return ResponseUtils.completed(tourListService.getTourlistByAddCountTop9());
     }
 
-    @PostMapping("/es/recommendCountDesc/{areaData}")
+
+    @RequestMapping("/es/recCountDesc/all")
+    public ResponseEntity findByTourlistOrderByRecommendCountDesc() {
+        return ResponseUtils.completed(tourListService.getTourlistByRecommendCountTop9());
+    }
+
+    @RequestMapping("/es/ratingDesc/all")
+    public ResponseEntity findByTourlistOrderByRatingDesc() {
+        return ResponseUtils.completed(tourListService.getTourlistOrderByRatingDesc());
+    }
+
+    @RequestMapping("/es/addCountDesc")
+    public ResponseEntity findByTourlistOrderByAddCountDesc(@PathVariable String areaData) {
+        return ResponseUtils.completed(tourListService.getTourlistByAddCountByAreacode(areaData));
+    }
+
+    @RequestMapping("/es/recommendCountDesc/{areaData}")
     public ResponseEntity findByTourlistOrderByRecommemdCountDesc(@PathVariable String areaData){
 //        System.out.println(areaData);
         return ResponseUtils.completed(tourListService.getTourlistByRecommendCount(areaData));

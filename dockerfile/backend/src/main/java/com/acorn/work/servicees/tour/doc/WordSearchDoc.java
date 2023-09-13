@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 @Document(indexName = "wordsearch")
 @AllArgsConstructor
@@ -16,13 +17,14 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Getter
 @Builder
 @JsonIgnoreProperties(ignoreUnknown=true)
+@Setting(settingPath = "/wordsearch.json")
 public class WordSearchDoc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String wordSearchId;
 
-    @Field(type = FieldType.Text, analyzer = "nori", fielddata = true)
+    @Field(type = FieldType.Text, analyzer = "nori_analyzer", fielddata = true)
     private String words;
 
 }

@@ -42,24 +42,26 @@ public class WordSearchService  {
     }
 
     public List<WordSearchRspDTO> comparisonWord() throws  IOException{
-        List<WordSearchRspDTO> wordSearchRspDTOS = EcMapper.INSTANCE.toWordSearchRspDTOs(wordSearchRepository.findAll());
-
+        List<WordSearchRspDTO> wordSearchRspDTOS =
+                EcMapper.INSTANCE.toWordSearchRspDTOs(wordSearchRepository.findTop10ByOrderByCntDesc());
         List<WordSearchRspDTO> wordSearchRspDTOS2 = getTopTags("words",10);
 
-
-        System.out.println(wordSearchRspDTOS.toString());
-        System.out.println(wordSearchRspDTOS2.toString());
-        for(int i = 0 ; i < 10 ; i ++) {
-            for (int j = 0; j < 10; j++) {
-                if (wordSearchRspDTOS2.get(i).getWord().equals(wordSearchRspDTOS.get(j).getWord())) {
-                    System.out.println("i : " + i + "j : " + j);
-                    wordSearchRspDTOS2.get(i).setNo(j-i);
-                    break;
-                } else {
-                    wordSearchRspDTOS2.get(i).setNo(999);
+            for (int i = 0 ; i < wordSearchRspDTOS2.size() ; i ++) {
+                for (int j = 0 ; j < wordSearchRspDTOS.size() ; j++) {
+                    if (wordSearchRspDTOS2.get(i).getWord().equals(wordSearchRspDTOS.get(j).getWord())) {
+                        if (j-i>0) {
+                            wordSearchRspDTOS2.get(i).setNo("▲" + (j-i));
+                        } else if (j==i) {
+                            wordSearchRspDTOS2.get(i).setNo("0");
+                        } else {
+                            wordSearchRspDTOS2.get(i).setNo("▼" + (i-j));
+                        }
+                        break;
+                    } else {
+                        wordSearchRspDTOS2.get(i).setNo("new");
+                    }
                 }
             }
-        }
         return wordSearchRspDTOS2;
     }
 
@@ -76,7 +78,7 @@ public class WordSearchService  {
                         .aggregations("top_tags", a -> a
                                 .terms(h -> h
                                         .field(fieldname)
-                                        .size(20)
+                                        .size(size)
                                 )
                         ),
                 Void.class
@@ -86,15 +88,10 @@ public class WordSearchService  {
 
                 .get("top_tags")
                 .sterms().buckets().array().stream().map(bucket -> {
-                    if (String.valueOf(bucket.key()._get()).length()==1) {
-                        return null;
-                    }
                     WordSearchRspDTO wordSearchRspDTO = WordSearchRspDTO.builder()
                             .word(String.valueOf(bucket.key()._get()))
                             .cnt((int) bucket.docCount())
                             .build();
-
-//                    System.out.println(wordSearchRspDTO.toString());
                     return wordSearchRspDTO;
 
                 }).collect(Collectors.toList());

@@ -82,7 +82,7 @@ public class TourListService {
 
     }
 
-    public List<TourListDoc> getTourlistByAddCount(String areacode) {
+    public List<TourListDoc> getTourlistByAddCountByAreacode(String areacode) {
         Pageable pageable = PageRequest.of(0,5);
         return tourListDocRepository.findByOrderByAddCountDesc(pageable);
     }
@@ -138,4 +138,21 @@ public class TourListService {
     }
 
 
+    public ResponsePageDTO getTourListByAreacode(String searchValue, String areacode, Pageable pageable) {
+        return ResponsePageDTO.setResponsePageDTO(null);
+    }
+    public List<TourListDoc> getTourlistByAddCountTop9() {
+        Pageable pageable = PageRequest.of(0,9);
+        return tourListDocRepository.findByOrderByAddCountDesc(pageable);
+    }
+
+    public List<TourListDoc> getTourlistByRecommendCountTop9() {
+        Pageable pageable = PageRequest.of(0,9);
+        return tourListDocRepository.findByOrderByRecommendCountDesc(pageable);
+    }
+
+    public List<TourListDoc> getTourlistOrderByRatingDesc() {
+        Pageable pageable = PageRequest.of(0,10);
+        return tourListDocRepository.findByOrderByRatingDesc(pageable);
+    }
 }
