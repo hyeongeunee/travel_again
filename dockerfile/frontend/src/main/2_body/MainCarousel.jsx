@@ -67,7 +67,7 @@ export default function MainCarousel() {
                   </div>
                   <div style={{ display: "flex" }}>
                     <StarIcon style={{ color: "#FACC2E", padding: "5%" }} />
-                    <p style={{ margin: "0" }}></p>
+                    <p style={{ margin: "0" }}>{item.rating}</p>
                   </div>
                 </Grid>
               </CardActions>

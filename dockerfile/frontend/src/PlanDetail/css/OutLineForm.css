@@ -25,13 +25,14 @@
     border: 1px solid black;
     text-align: center;
     height: auto;
-    max-height: 100px;
+    min-height: 1   00px;
     text-align: center;
     
 }
 
 .number-list{
     display: flex;
+    padding: 2%;
 }
 
 .number-icon{

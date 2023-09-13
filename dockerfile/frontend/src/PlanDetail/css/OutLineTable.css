@@ -30,7 +30,10 @@
     color: #6E6E6E;
     font-weight: bold;
     font-size: 12px;
-    margin: 0;
+    margin-left: 2%;
+    margin-top: 2px;
+    margin-bottom: 0;
+    margin-right: 0;
 }   
 .loc-text{
     font: bold;

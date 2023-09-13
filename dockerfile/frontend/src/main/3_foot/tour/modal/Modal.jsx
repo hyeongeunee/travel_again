@@ -8,7 +8,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import CloseIcon from "@mui/icons-material/Close";
 import tourjson from "../../../../utils/trip.json";
 import { Link } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const Modal = ({ isOpen, onClose, areacode }) => {
   const [isFavorite, setIsFavorite] = React.useState(false);
@@ -83,9 +84,13 @@ const Modal = ({ isOpen, onClose, areacode }) => {
             <img src={areaData.locimages} alt={areaData.korTitle} />
           </div>
         </div>
+        <div>
         <Link to={`/plan`} state={{ areaData: areaData }}>
-          <button className="modal-button">일정 생성하기</button>
+        <Button variant="contained" className="modal-button" endIcon={<ChevronRightIcon />} size="large">
+                        일정 생성하기
+                    </Button>
         </Link>
+        </div>
       </div>
     </div>
   );
