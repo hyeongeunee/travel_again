@@ -26,10 +26,16 @@ public class TourListController {
         return ResponseUtils.completed(tourListService.getTourList(searchValue,pageable));
     }
 
-    @RequestMapping("/es/search/{areacode}")
-    public ResponseEntity searchlistByAreacode(@RequestParam("searchValue") String searchValue,@PathVariable String areacode, Pageable pageable){
-        return ResponseUtils.completed(tourListService.getTourListByAreacode(searchValue,areacode,pageable));
+    @RequestMapping("es/search/{areacode}")
+    public ResponseEntity searchTourListByAreacode(@RequestParam("searchValue") String searchValue,Pageable pageable,@PathVariable String areacode){
+        System.out.println(searchValue + " ||| " + areacode);
+        return ResponseUtils.completed(tourListService.getTourList2(searchValue,pageable,areacode));
     }
+
+//    @RequestMapping("/es/search/{areacode}")
+//    public ResponseEntity searchlistByAreacode(@RequestParam("searchValue") String searchValue,@PathVariable String areacode, Pageable pageable){
+//        return ResponseUtils.completed(tourListService.getTourListByAreacode(searchValue,areacode,pageable));
+//    }
 
     @PostMapping("/es/title")
     // @RequestParam("title")

@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.HtmlUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -38,10 +38,19 @@ public class controller {
             .content(gson.toJson(wordSearchService.comparisonWord())).build();
   }
 
+  @MessageMapping("/scheduledmsg2")
+  @SendTo("/topic/message")
+  public GreetingMessag chat(HelloMessage message) throws Exception{
+    return GreetingMessag.builder()
+            .content(HtmlUtils.htmlEscape(message.getUsername()+ " : " + message.getName())).build();
+  }
 
-  @Scheduled(cron = "0/10 * * * * *" )
+
+//  @Scheduled(cron = "0/10 * * * * *" )
   public void sendMsg() throws Exception{
-    System.out.println("스케쥴");
+
+//    if(true && Webs){}
+
 //    GreetingMessag greetingMessag = GreetingMessag.builder()
 //            .content("[메세지]" + UuidUtils.getUUID() + " ..... !").build();
     Gson gson = new Gson();

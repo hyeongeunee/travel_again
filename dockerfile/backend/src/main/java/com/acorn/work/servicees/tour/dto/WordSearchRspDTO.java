@@ -15,4 +15,5 @@ public class WordSearchRspDTO {
     private String word;
     private int cnt;
     private String no;
+    private String areacode;
 }

@@ -73,6 +73,17 @@ es:
   fingerprint: ab83ac099f304b0397f81a21ca6496d73b6ec27cf8b5d415b1050ad850eca84e
   cadrt: /Users/ramachell/Documents/teamproject/travel_again/dockerfile/backend/elk/http_ca.crt
 
+# hwang mac
+#es:
+#  host: localhost
+#  port: 9200
+#  username: elastic
+#  password: 3JC+ju1pAFt2ab9p2+_V
+#  schemeName: https
+#  ssl: fingerprint
+#  fingerprint: ab83ac099f304b0397f81a21ca6496d73b6ec27cf8b5d415b1050ad850eca84e
+#  cadrt: /Users/ramachell/Documents/teamproject/travel_again/dockerfile/backend/elk/http_ca.crt
+
 
 #doc:
 #  demoIndex: demo

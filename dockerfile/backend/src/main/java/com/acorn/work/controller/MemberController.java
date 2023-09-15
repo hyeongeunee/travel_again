@@ -38,12 +38,12 @@ public class MemberController {
         Boolean isExist = memberService.checkId(checkId);
         return ResponseUtils.completed(isExist);
     }
-
-    @PostMapping("/signin")
-    public ResponseEntity signin(@RequestBody MemberDTO memberDTO){
-        String memberId = memberService.signIn(memberDTO);
-        return ResponseUtils.completed(memberId);
-    }
-
+//
+//    @PostMapping("/signin")
+//    public ResponseEntity signin(@RequestBody MemberDTO memberDTO){
+//        String memberId = memberService.signIn(memberDTO);
+//        return ResponseUtils.completed(memberId);
+//    }
+//
 
 }

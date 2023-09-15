@@ -16,7 +16,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     public String signup(MemberDTO memberDTO) {
-//        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
         if (memberRepository.existsByMemberId(memberDTO.getMemberId())){
             return "아이디가 이미 존재합니다";
         }

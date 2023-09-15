@@ -18,7 +18,7 @@ export default function MainCarousel() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://192.168.0.42:9000/tourlist/es/recCountDesc/all"
+        "http://192.168.0.86:9000/tourlist/es/recCountDesc/all"
       );
       setData(response.data.data); // 가져온 데이터를 state에 저장합니다.
     } catch (error) {

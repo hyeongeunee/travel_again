@@ -14,12 +14,12 @@ import java.io.IOException;
 public class WordSearchController {
 
     private final WordSearchService wordSearchService;
-
-    @PutMapping("/{words}")
-    public ResponseEntity saveWordSearch(@PathVariable String words) {
-        System.out.println(words);
-        return ResponseUtils.completed(wordSearchService.saveWordSearch(words));
-    }
+//
+//    @PutMapping("/{words}")
+//    public ResponseEntity saveWordSearch(@PathVariable String words) {
+//        System.out.println(words);
+//        return ResponseUtils.completed(wordSearchService.saveWordSearch(words));
+//    }
 
     @GetMapping("/getTags/{fieldname}/{size}")
     public ResponseEntity saveWordSearch(@PathVariable String fieldname,

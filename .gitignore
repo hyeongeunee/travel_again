@@ -10,6 +10,7 @@
 
 dockerfile/backend/data/traveldb.mv.db
 dockerfile/backend/data/traveldb.trace.db
+dockerfile/backend/resources/config/custom/el.yml
 
 # Created by git when using merge tools for conflicts
 *.BACKUP.*

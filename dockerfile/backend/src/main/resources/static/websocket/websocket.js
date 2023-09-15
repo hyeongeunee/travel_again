@@ -1,12 +1,16 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:9000/gs-websocket'
+    brokerURL: 'ws://192.168.0.86:9000/gs-websocket'
 });
+
 
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
     stompClient.subscribe('/topic/message2', (message) => {
         showGreeting(JSON.parse(message.body).content);
+    })
+    stompClient.subscribe('/topic/message', (message) => {
+        showGreeting2(JSON.parse(message.body).content);
     });
 };
 
@@ -43,21 +47,30 @@ function disconnect() {
 
 function sendName() {
     stompClient.publish({
-        destination: "/app/scheduledmsg",
-        body: JSON.stringify({'name': $("#name").val()})
+        destination: "/app/scheduledmsg2",
+        body: JSON.stringify({'username': $("#username").val(), 'name': $("#name").val()})
     });
 }
 
 function showGreeting(message) {
     const row = JSON.parse(message);
     $("#greetings").text("");
-
     for ( let i = 0 ; i < row.length ; i ++){
     $("#greetings").append("<tr><td>" + row[i]["word"] + "|" + row[i]["cnt"]+ "|" + row[i]["no"]  + "</td></tr>")
     }
     console.log("웹소켓 으로 받은 메시지 : " + message);
 
     console.log(row);
+}
+
+function showGreeting2(message) {
+
+//    $("#greetings").text("");
+
+    $("#greetings").append("<tr><td>" + message + "</td></tr>")
+
+    console.log("웹소켓 으로 받은 메시지 : " + message);
+
 }
 
 $(function () {

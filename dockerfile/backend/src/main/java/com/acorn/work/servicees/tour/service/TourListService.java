@@ -77,6 +77,13 @@ public class TourListService {
         return ResponsePageDTO.setResponsePageDTO(tourListDocPage);
     }
 
+    public ResponsePageDTO getTourList2(String searchValue, Pageable pageable, String areacode) {
+        wordSearchService.saveWordSearch(searchValue);
+//        Page<TourListDoc> tourListDocPage = tourListDocRepository.findByAreacodeAndTitleOrOverviewOrAddr1(areacode,searchValue,searchValue,searchValue,pageable);
+        Page<TourListDoc> tourListDocPage = tourListDocRepository.findByAreacodeAndOverview(areacode,searchValue,pageable);
+        return ResponsePageDTO.setResponsePageDTO(tourListDocPage);
+    }
+
     public SearchResDTO findTourListDocByMatch(TourListeReqDTO tourListeReqDTO) {
         return tourListDocRepository.getQueryMatch(tourListeReqDTO, TourListEcDTO.class);
 
@@ -155,4 +162,5 @@ public class TourListService {
         Pageable pageable = PageRequest.of(0,10);
         return tourListDocRepository.findByOrderByRatingDesc(pageable);
     }
+
 }

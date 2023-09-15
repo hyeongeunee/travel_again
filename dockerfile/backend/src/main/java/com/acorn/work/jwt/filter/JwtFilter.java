@@ -29,7 +29,7 @@ public class JwtFilter extends OncePerRequestFilter{
     @Autowired
     private JwtUtil jwtUtil;
     @Autowired
-    private CustomUserDetailsService service;
+    private CustomUserDetailsService userDetailsServiceservice;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -49,7 +49,7 @@ public class JwtFilter extends OncePerRequestFilter{
         //userName 이 존재하고  Spring Security 에서 아직 인증을 받지 않은 상태라면
         if(userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             //읽어낸 userName 을 이용해서  UserDetails 객체를 얻어낸다
-            UserDetails userDetails=service.loadUserByUsername(userName);
+            UserDetails userDetails=userDetailsServiceservice.loadUserByUsername(userName);
             //token 이 유효한 토큰인지 유틸을 이용해서 알아낸다
             boolean isValid = jwtUtil.validateToken(token, userDetails);
             if(isValid) {

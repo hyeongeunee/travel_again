@@ -60,7 +60,7 @@ public class TourListDoc {
     @Field(type = FieldType.Integer )
     private int addCount;
 
-    private float rating;
+    private float    rating;
 
     private String createdtime;
     private String cpyrhtDivCd;
