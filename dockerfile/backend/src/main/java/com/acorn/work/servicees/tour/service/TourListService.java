@@ -79,7 +79,6 @@ public class TourListService {
 
     public ResponsePageDTO getTourList2(String searchValue, Pageable pageable, String areacode) {
         wordSearchService.saveWordSearch(searchValue);
-//        Page<TourListDoc> tourListDocPage = tourListDocRepository.findByAreacodeAndTitleOrOverviewOrAddr1(areacode,searchValue,searchValue,searchValue,pageable);
         Page<TourListDoc> tourListDocPage = tourListDocRepository.findByAreacodeAndOverview(areacode,searchValue,pageable);
         return ResponsePageDTO.setResponsePageDTO(tourListDocPage);
     }

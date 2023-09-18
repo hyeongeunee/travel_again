@@ -38,6 +38,7 @@ public class WordSearchService  {
     }
 
     public void saveWordCount() throws IOException{
+        wordSearchRepository.deleteAll();
         wordSearchRepository.saveAll(EcMapper.INSTANCE.toWordSearchEntities(getTopTags("words",10)));
     }
 

@@ -27,6 +27,4 @@ public class WordSearchDoc {
     @Field(type = FieldType.Text, analyzer = "nori_analyzer", fielddata = true)
     private String words;
 
-    private String areacode;
-
 }

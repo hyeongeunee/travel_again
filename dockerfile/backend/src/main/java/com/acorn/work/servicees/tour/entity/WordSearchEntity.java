@@ -26,6 +26,4 @@ public class WordSearchEntity {
     @Column(length = 10)
     private int cnt;
 
-    @Column(length = 4)
-    private String areacode;
 }
