@@ -11,6 +11,7 @@ import { darkModeState, darkTheme, lightTheme } from "./atoms/DarkModeState";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+
 export default function RouteApp() {
     const isDarkMode = useRecoilValue(darkModeState);
     const theme = isDarkMode ? darkTheme : lightTheme;

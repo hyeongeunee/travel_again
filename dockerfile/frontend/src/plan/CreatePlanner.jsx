@@ -101,10 +101,12 @@ function CreatePlanner() {
         <p className="kor-title">{areaData.korTitle}</p>
         <p className="eng-title">{areaData.engTitle}</p>
       </div>
-      <Button className="realTimeBtn" style={searchBtn} onClick={realModalOpen}>
-        실시간 인기검색어
-      </Button>
-      <Modal isOpen={realModal} onClose={realModalClose} />
+      <div className="realContainer">
+        <Button className="realTimeBtn" onClick={realModalOpen}>
+          실시간 인기검색어
+        </Button>
+        <Modal isOpen={realModal} onClose={realModalClose} />
+      </div>
 
       <div className="TestContainer">
         <Grid container className="gridContainer">

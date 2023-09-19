@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
-import '../css/DatePicker.css';
-import { eachDayOfInterval, format } from 'date-fns';
-import ko from 'date-fns/locale/ko';
+import React, { useState } from "react";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import "../css/DatePicker.css";
+import { eachDayOfInterval, format } from "date-fns";
+import ko from "date-fns/locale/ko";
 
-function DatePicker({ onDateChange, checkingSDate, checkingEDate,datesArray }) {
+function DatePicker({ onDateChange, checkingSDate, checkingEDate, datesArray }) {
     const [state, setState] = useState([
         {
             startDate: null,
             endDate: null,
-            key: 'selection',
+            key: "selection",
         },
     ]);
 
@@ -30,10 +30,8 @@ function DatePicker({ onDateChange, checkingSDate, checkingEDate,datesArray }) {
         });
 
         // 날짜 형식을 변경하거나 필요한 처리 수행
-        const formattedDates = datesArray.map(date =>
-            format(date, 'yyyy-MM-dd EEEE', { locale: ko })
-        );
-            
+        const formattedDates = datesArray.map((date) => format(date, "yyyy-MM-dd EEEE", { locale: ko }));
+
         onDateChange(formattedDates);
     }
 
@@ -50,10 +48,10 @@ function DatePicker({ onDateChange, checkingSDate, checkingEDate,datesArray }) {
                 showSelectionPreview={true}
                 months={1}
                 direction="horizontal"
-                rangeColors={['#3d91ff']}
+                rangeColors={["#3d91ff"]}
                 showMonthAndYearPickers={false}
                 format="yyyy-MM-dd"
-                dateDisplayFormat={'yyyy.MM.dd'}
+                dateDisplayFormat={"yyyy.MM.dd"}
             />
         </div>
     );

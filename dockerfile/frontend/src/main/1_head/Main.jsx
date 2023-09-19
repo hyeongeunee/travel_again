@@ -1,42 +1,40 @@
-import { Box, Button, useMediaQuery, useTheme } from '@mui/material';
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { checkLoggedIn } from '../../util/checkLoginStatus';
-import './Main.css';
+import { Box, Button, useMediaQuery, useTheme } from "@mui/material";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { checkLoggedIn } from "../../util/checkLoginStatus";
+import "./Main.css";
 
 export default function Main() {
     const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const firstBoxWidth = isSmallScreen ? '100%' : '83.3333%';
-    const secondBoxWidth = isSmallScreen ? '100%' : '16.6666%';
+    const firstBoxWidth = isSmallScreen ? "100%" : "83.3333%";
+    const secondBoxWidth = isSmallScreen ? "100%" : "16.6666%";
 
     // --------------------------- 버튼 눌렀을 때 로그인 유무 관련 로직입니다..
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const token = localStorage.getItem("token");
 
-        // 여기에서 로그인 상태 세션으로 확인
-        // const isLoggedIn = checkLoggedIn();
-
-        // if (isLoggedIn) {
-        scrollToDesiredPosition();
-        // } else {
-        // navigate('/login');
-        // }
+        if (token) {
+            scrollToDesiredPosition();
+        } else {
+            navigate("/signIn");
+        }
     };
 
     // -------------------------------------------------------
-    // useEffect(() => {
-    //     // 페이지 로딩 시 로그인 상태를 확인하고 이동
-    //     const isLoggedIn = checkLoggedIn();
+    useEffect(() => {
+        // 페이지 로딩 시 로그인 상태를 확인하고 이동
+        const isLoggedIn = checkLoggedIn();
 
-    //     if (isLoggedIn) {
-    //         scrollToDesiredPosition();
-    //     }
-    // }, []);
+        if (isLoggedIn) {
+            scrollToDesiredPosition();
+        }
+    }, []);
 
     const scrollToDesiredPosition = () => {
         window.scrollTo(0, 1530);
@@ -50,7 +48,7 @@ export default function Main() {
                     width: firstBoxWidth,
                 }}
             >
-                <img src="/10.gif" alt="a" style={{ width: '100%', height: '100%', borderRadius: '10px' }} />
+                <img src="/10.gif" alt="a" style={{ width: "100%", height: "100%", borderRadius: "10px" }} />
             </Box>
             <Box
                 className="second-box"
@@ -66,7 +64,7 @@ export default function Main() {
                         type="submit"
                         size="large"
                         variant="contained"
-                        sx={{ mt: '3px', mb: '2px', mr: '10px' }}
+                        sx={{ mt: "3px", mb: "2px", mr: "10px" }}
                     >
                         시작하기
                     </Button>

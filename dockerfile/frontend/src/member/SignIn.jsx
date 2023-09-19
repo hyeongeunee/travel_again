@@ -1,19 +1,20 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import { yellow, green } from '@mui/material/colors';
-import { Divider, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import axios from 'axios';
+import { Divider, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -21,7 +22,7 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
     const [showPassword, setShowPassword] = React.useState(false);
-
+    const navigate = useNavigate();
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleSubmit = async (event) => {
@@ -29,13 +30,20 @@ export default function SignIn() {
         // ------------ 나중에 서버랑 연결할 때 주석제거하기 ---------------------------
         const data = new FormData(event.currentTarget);
         try {
-            const response = await axios.post('http://localhost:9000/member/signin', {
-                memberId: data.get('id'),
-                pwd: data.get('password'),
+            const response = await axios.post("http://localhost:9000/member/signin", {
+                memberId: data.get("id"),
+                pwd: data.get("password"),
             });
-            console.log('서버 응답:', response.data);
+            // 로그인이 성공한 경우, 세션에 로그인 정보 저장
+            if (response.data) {
+                localStorage.setItem("token", response.data.token);
+                axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
+                navigate("/");
+            }
+            console.log("서버 응답:", response.data);
+            navigate("/");
         } catch (error) {
-            console.error('오류:', error);
+            console.error("오류:", error);
         }
     };
 
@@ -47,12 +55,12 @@ export default function SignIn() {
                 <Box
                     sx={{
                         marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: '' }}>
+                    <Avatar sx={{ m: 1, bgcolor: "" }}>
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
@@ -65,7 +73,7 @@ export default function SignIn() {
                             <OutlinedInput
                                 id="outlined-adornment-password"
                                 name="password"
-                                type={showPassword ? 'text' : 'password'}
+                                type={showPassword ? "text" : "password"}
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
@@ -84,7 +92,7 @@ export default function SignIn() {
                         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                             로그인
                         </Button>
-                        <Grid container alignContent={'center'} justifyContent={'center'}>
+                        <Grid container alignContent={"center"} justifyContent={"center"}>
                             <Grid item>
                                 <Link href="forgotPassword" variant="body2">
                                     비밀번호 찾기
