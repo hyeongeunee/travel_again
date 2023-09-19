@@ -36,7 +36,7 @@ export default function SignIn() {
             });
             // 로그인이 성공한 경우, 세션에 로그인 정보 저장
             if (response.data) {
-                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("token", response.data.data);
                 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
                 navigate("/");
             }

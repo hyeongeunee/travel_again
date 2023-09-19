@@ -61,7 +61,7 @@ export default function SignUp() {
             });
             // 서버 응답 처리
             console.log("서버 응답:", response.data);
-            if (response.data.success) {
+            if (response.data) {
                 navigate("/signIn");
             }
         } catch (error) {
