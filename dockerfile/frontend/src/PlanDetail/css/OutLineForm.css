@@ -1,6 +1,6 @@
 .item-container{
     height: auto;
-    
+    margin-bottom: 120px;
 }
 
 .table-container{
@@ -11,23 +11,12 @@
 .map-container{
     
     border: 1px solid black  ;
-    max-height: 300px;
+    max-height: 343px;
     height: auto;   
     
 }
 
-.map-header{
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    font-size: 25px;
-    color: #EEEEEE;
-    background-color: #083041;
-    border: 1px solid black;
-    text-align: center;
-    height: 40px;
-    max-height: 40px;
-}
+
 
 .map-footer{
     display: flex;
@@ -35,16 +24,15 @@
     flex-wrap: wrap;
     border: 1px solid black;
     text-align: center;
-    height: 100px;
-    max-height: 100px;
+    height: auto;
+    min-height: 1   00px;
     text-align: center;
     
 }
 
 .number-list{
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    padding: 2%;
 }
 
 .number-icon{

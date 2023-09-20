@@ -1,0 +1,30 @@
+.wtg-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.searchBar-grid{
+    display: flex;
+    justify-content: center;
+}
+
+.searchBar-container{
+    height: 55px;
+    width: 50%;
+    
+}
+
+.searchBar-container:hover{
+    box-shadow: 0 7px 9px rgba(0,0,0,0.30);
+    
+}
+
+@media(min-width: 754px){
+    .searchBar-container{
+    
+        width: 50%;
+        
+    }
+    
+}
+

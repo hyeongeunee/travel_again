@@ -20,6 +20,7 @@ public class PlannerController {
     @PostMapping("/insert")
     @ResponseBody
     public ResponseEntity plannerInsert(@RequestBody PlannerDTO plannerDTO) {
+        System.out.println(plannerDTO.toString());
         plannerService.plannerInsert(plannerDTO);
         return ResponseUtils.completed(plannerDTO);
     }

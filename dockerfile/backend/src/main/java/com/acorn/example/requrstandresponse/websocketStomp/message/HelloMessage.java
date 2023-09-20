@@ -13,4 +13,6 @@ import lombok.NoArgsConstructor;
 public class HelloMessage {
   @JsonProperty("name")
   private String name;
+  @JsonProperty("username")
+  private String username;
 }

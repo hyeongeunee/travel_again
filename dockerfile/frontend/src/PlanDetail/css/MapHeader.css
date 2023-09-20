@@ -1,0 +1,13 @@
+.map-header{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 25px;
+    color: #EEEEEE;
+    background-color: #083041;
+    border: 1px solid black;
+    text-align: center;
+    height: 50px;
+    max-height: 50px;
+    align-items: center;
+}

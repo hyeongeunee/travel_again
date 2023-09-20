@@ -2,10 +2,11 @@
     width: 80%;
     padding-left: 10%;
     padding-right: 10%;
+    
 }
 .img{
     border-radius: 5px;
-    z-index: -1;
+    z-index: 0;
     filter: brightness(0.7);
 }
 

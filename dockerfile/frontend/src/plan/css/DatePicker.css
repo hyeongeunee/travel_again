@@ -1,0 +1,11 @@
+.calendar {
+    display: flex;
+}
+.rdrMonths {
+    display: flex;
+    justify-content: center;
+    
+}
+.rdrMonth {
+    width: 100%;
+}

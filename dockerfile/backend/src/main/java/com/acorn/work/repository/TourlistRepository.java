@@ -10,11 +10,14 @@ import java.util.List;
 
 @Repository
 public interface TourlistRepository extends JpaRepository<TourlistEntity, String >, TourlistCustomRepository {
-    Page<TourlistEntity> findByAreacode(String areacode,Pageable pageable);
+    Page<TourlistEntity> findByAreacodeOrderByRecommendCountDesc(String areacode, Pageable pageable);
 
     List<TourlistEntity> findByTitleContains(String title, Pageable pageable);
+
     Page<TourlistEntity> findTourlistEntitiesByTitleContains(String title, Pageable pageable);
 
 
+    List<TourlistEntity> findAllByOrderByRecommendCountDesc(Pageable pageable);
 
+    List<TourlistEntity> findAllByOrderByAddCountDesc(Pageable pageable);
 }

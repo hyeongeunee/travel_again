@@ -1,12 +1,13 @@
+//일정 테이블
 import React from "react";
 import ".././css/DateTable.css"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
-import { Circle } from "@mui/icons-material";
 import DateTableBody from "./DateTableBody";
 export default function DateTable(){
+   
     return(
         <div className="table-container">    
             <table>
@@ -18,6 +19,7 @@ export default function DateTable(){
                          <th><PendingActionsIcon sx={{fontSize:"14px"}}/> 일정</th>
                    </tr>
                 </thead>
+                {/* 일정페이지 내용 */}
                 <DateTableBody/>
             </table>
         </div>

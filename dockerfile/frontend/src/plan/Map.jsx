@@ -1,123 +1,119 @@
 import React, { useEffect } from 'react';
 import './Map.css';
-import { textOverCut } from './textOverCut.js';
+import { textOverCut } from '../util/textOverCut';
 
-function Map({ selectedItems }) {
-    useEffect(() => {
-        const { kakao } = window;
-        const container = document.getElementById('map');
+function Map({ selectedItems, areaData }) {
+  useEffect(() => {
+    const { kakao } = window;
+    const container = document.getElementById('map');
 
-        const options = {
-            center: new kakao.maps.LatLng(37.4987464, 127.03169),
-            level: 9,
-        };
-        const map = new kakao.maps.Map(container, options);
+    const options = {
+      center: new kakao.maps.LatLng(areaData.mapy, areaData.mapx),
+      level: areaData.mlevel,
+    };
+    const map = new kakao.maps.Map(container, options);
 
-        const positions = [];
+    // Marker와 Polyline을 담을 배열
+    const markers = [];
+    const lines = [];
 
-        let linePath = [];
+    // Overlay와 CustomOverlay를 담을 배열
+    const overlays = [];
+    const customOverlays = [];
 
-        // Map 컴포넌트 내에서 flattenedItems 로컬 변수로 설정
-        const flattenedItems = selectedItems.flat();
+    // Map 컴포넌트 내에서 flattenedItems 로컬 변수로 설정
+    const flattenedItems = selectedItems.flat();
 
-        for (let i = 0; i < flattenedItems.length; i++) {
-            const position = {
-                title: flattenedItems[i].title,
-                latlng: new kakao.maps.LatLng(flattenedItems[i].mapy, flattenedItems[i].mapx),
-                firstimage: flattenedItems[i].firstimage,
-            };
-            positions.push(position);
-        }
+    // 지도 중심 좌표를 설정하는 함수
+    const setMapCenter = () => {
+      if (flattenedItems.length > 0) {
+        const bounds = new kakao.maps.LatLngBounds();
+        flattenedItems.forEach((item) => {
+          bounds.extend(new kakao.maps.LatLng(item.mapy, item.mapx));
+        });
+        map.setBounds(bounds);
+      }
+    };
 
-        for (let j = 0; j < positions.length; j++) {
-            if (j !== 0) {
-                linePath = [positions[j - 1].latlng, positions[j].latlng];
-            }
+    setMapCenter(); // 초기 지도 중심 좌표 설정
 
-            const drawLine = new kakao.maps.Polyline({
-                map: map,
-                path: linePath,
-                strokeWeight: 3,
-                strokeColor: '#db4040',
-                strokeOpacity: 1,
-                strokeStyle: 'solid',
-            });
-        }
+    flattenedItems.forEach((item, index) => {
+      // Marker 생성
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(item.mapy, item.mapx),
+        title: item.title,
+        image: new kakao.maps.MarkerImage(
+          'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png',
+          new kakao.maps.Size(24, 35)
+        ),
+      });
 
-        const imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png';
-        const overlays = [];
+      markers.push(marker);
 
-        for (let k = 0; k < positions.length; k++) {
-            const imageSize = new kakao.maps.Size(24, 35);
-            const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+      // Overlay 내용 생성
+      const overlayContent = `
+        <div class="overlaybox">
+          <div class="boxtitle" onclick="closeOverlay(${index})">${item.title}</div>
+          <div class="first">
+            <img src="${item.firstimage}" alt="tour Image" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="triangle text">${index + 1}</div>
+            <div class="addr text">${item.addr1}</div>
+          </div>
+          <span class="title">
+            ${textOverCut(item.overview, 102, ' ... ')}
+          </span>
+        </div>
+      `;
 
-            const marker = new kakao.maps.Marker({
-                map: map,
-                position: positions[k].latlng,
-                title: positions[k].title,
-                image: markerImage,
-            });
+      // CustomOverlay 생성
+      const customOverlay = new kakao.maps.CustomOverlay({
+        position: new kakao.maps.LatLng(item.mapy, item.mapx),
+        content: overlayContent,
+        xAnchor: 0.3,
+        yAnchor: 0.91,
+      });
 
-            const content = `<div class="overlaybox">
-                        <div class="boxtitle" onclick="closeOverlay(${k})">${flattenedItems[k].title}</div>
-                        <div class="first">
-                            <img src="${
-                                positions[k].firstimage
-                            }" alt="tour Image" style="width: 100%; height: 100%; object-fit: cover;">
-                            <div class="triangle text">${k + 1}</div>
-                            <div class="addr text">${flattenedItems[k].addr1}</div>
-                        </div>
-                        <span class="title">
-                        ${textOverCut(flattenedItems[k].overview, 102, ' ... ')}
-                        </span>
-                    </div>`;
+      customOverlays.push(customOverlay);
 
-            const overlay = new kakao.maps.CustomOverlay({
-                position: positions[k].latlng,
-                content: content,
-                xAnchor: 0.3,
-                yAnchor: 0.91,
-            });
+      // Marker에 이벤트 리스너 등록
+      kakao.maps.event.addListener(marker, 'mouseover', () => customOverlay.setMap(map));
+      kakao.maps.event.addListener(marker, 'mouseout', () => customOverlay.setMap(null));
+      kakao.maps.event.addListener(marker, 'click', () => customOverlay.setMap(map));
+    });
 
-            overlays.push(overlay);
+    // Polyline 그리기
+    for (let i = 1; i < markers.length; i++) {
+      const linePath = [markers[i - 1].getPosition(), markers[i].getPosition()];
 
-            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, overlay));
-            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(overlay));
-            kakao.maps.event.addListener(marker, 'click', makeClickListener(overlay));
-        }
+      const drawLine = new kakao.maps.Polyline({
+        map: map,
+        path: linePath,
+        strokeWeight: 3,
+        strokeColor: '#db4040',
+        strokeOpacity: 1,
+        strokeStyle: 'solid',
+      });
 
-        function makeOverListener(map, overlay) {
-            return function () {
-                overlay.setMap(map);
-            };
-        }
+      lines.push(drawLine);
+    }
 
-        function makeOutListener(overlay) {
-            return function () {
-                overlay.setMap(null);
-            };
-        }
+    // 닫기 버튼을 클릭할 때 Overlay를 닫는 함수
+    window.closeOverlay = function (index) {
+      customOverlays[index].setMap(null);
+    };
+  }, [selectedItems, areaData.mapx, areaData.mapy, areaData.mlevel]);
 
-        function makeClickListener(overlay) {
-            return function () {
-                overlay.setMap(map);
-            };
-        }
-
-        window.closeOverlay = function (index) {
-            overlays[index].setMap(null);
-        };
-    }, [selectedItems]);
-
-    return (
-        <div
-            id="map"
-            style={{
-                width: '100%',
-                height: '900px',
-            }}
-        ></div>
-    );
+  return (
+    <div
+      id="map"
+      className='planner-map'
+      style={{
+        width: '100%',
+        height: '750px',
+      }}
+    ></div>
+  );
 }
 
 export default Map;
