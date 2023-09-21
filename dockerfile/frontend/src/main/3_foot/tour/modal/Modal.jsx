@@ -79,7 +79,7 @@ const Modal = ({ isOpen, onClose, areacode }) => {
                     </div>
                 </div>
                 <Link to={`/plan`} state={{ areaData: areaData }}>
-                    <Button className="modal-button" endIcon={<ChevronRightIcon />}>
+                    <Button className="modal-button" style={{backgroundColor:"#007bff", color:"white"}} endIcon={<ChevronRightIcon />}>
                         일정 생성하기
                     </Button>
                 </Link>

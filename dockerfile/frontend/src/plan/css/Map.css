@@ -1,7 +1,6 @@
 .overlaybox {
     position: relative;
-    width: 250px;
-    height: 390px;
+
     background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png') no-repeat;
     padding: 15px 10px;
 }
@@ -16,7 +15,7 @@
 }
 .overlaybox .boxtitle {
     color: #fff;
-    font-size: 16px;
+    font-size: 10px;
     font-weight: bold;
     background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png') no-repeat right 5px
         center;
@@ -27,7 +26,7 @@
     width: 250px;
     height: 136px;
     background: no-repeat;
-    margin-bottom: 6px;
+
     object-fit: cover;
 }
 
@@ -72,7 +71,6 @@
     color: #fff;
     background: #d24545;
 }
-
-#map {
-    border-radius: 10px;
+.planner-map {
+    border-radius: 15px;
 }

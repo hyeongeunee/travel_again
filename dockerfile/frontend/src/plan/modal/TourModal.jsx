@@ -64,14 +64,14 @@ const TourModal = ({ isOpen, onClose, contentid }) => {
                         </div>
                     </div>
                     <div className="tour-modal-btn">
-                        <Button
+                        {/* <Button
                             className="tour-modal-addBtn"
                             size="medium"
                             variant="contained"
                             sx={{ mt: '3px', mb: '2px', mr: '10px' }}
                         >
                             추가
-                        </Button>
+                        </Button> */}
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@ function RealTimeModal({ isOpen, onClose }) {
   const [rows, setRows] = useState([]);
 
   const handleSubmit = async () => {
-    const url = "http://192.168.0.40:9000/wordSearch/comp";
+    const url = "http://192.168.0.86:9000/wordSearch/comp";
   
     try {
       const response = await axios.get(url, {});

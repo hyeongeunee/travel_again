@@ -50,7 +50,7 @@ export default function SignUp() {
         // ------------ 나중에 서버랑 연결할 때 주석제거하기 ---------------------------
         const data = new FormData(event.currentTarget);
         try {
-            const response = await axios.post("http://localhost:9000/member/signup", {
+            const response = await axios.post("http://192.168.0.86:9000/member/signup", {
                 name: data.get("name"),
                 memberId: data.get("id"),
                 pwd: data.get("password"),
