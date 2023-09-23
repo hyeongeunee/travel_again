@@ -69,9 +69,11 @@ export default function AppendCard({ selectedItems, setSelectedItems }) {
                             </Typography>
                         </Typography>
 
-                        <div>
+                        <div style={{display:"flex"}}>
                             <FavoriteIcon sx={{ fontSize: 13, color: "#F44336" }} />
+                            <p style={{margin:"0", fontSize:"2px"}}>{item.recommendCount}</p>
                             <StarIcon sx={{ fontSize: 14, color: "#FBC02D" }} />
+                            <p style={{margin:"0", fontSize:"2px"}}>{item.rating}</p>
                         </div>
                     </CardContent>
                     <div

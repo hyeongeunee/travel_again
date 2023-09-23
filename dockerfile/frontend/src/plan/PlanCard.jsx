@@ -12,9 +12,16 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import TourModal from "./modal/TourModal";
 import Divider from "@mui/material/Divider";
+import axios from "axios";
+import PlanSearchBar from "./PlanSearchBar";
 
 export default function PlanCard({ selectedItems, setSelectedItems, selectedIndex, areaData }) {
     const [modalOpen, setModalOpen] = useState(false);
+    const [page, setPage] = useState(0);
+    const [tourList, setTourList] = useState([]);
+    const [selectedContentId, setSelectedContentId] = useState(null);
+    const [data, setData] = useState([]); 
+
     const openModal = (contentid) => {
         setSelectedContentId(contentid);
         setModalOpen(true);
@@ -23,27 +30,41 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
     const closeModal = () => {
         setModalOpen(false);
     };
-    const [tourList, setTourList] = useState([]);
-    const [selectedContentId, setSelectedContentId] = useState(null);
+
+
+    const handleSearch = (searchData) => {
+        setData(searchData);
+      };
+
     useEffect(() => {
         // API에서 데이터를 가져오는 함수
         async function fetchData() {
             try {
-                // 테스트 코드입니다
-                // const response = await fetch('http://localhost:3001/items'); // TODO : 서버쪽 데이터 들고오기
-                // if (!response.ok) {
-                //     throw new Error('네트워크 응답이 올바르지 않습니다');
-                // }
-                // const jsonData = await response.json();
-                setTourList(output); // TODO : 여기도 실제 데이터 들어올 때는 수정하기
+                const response = await axios(`http://192.168.0.86:9000/tourlist/es/list/areacode/${areaData.areacode}?page=${page}&size=6`);
+                if (response.status !== 200) {
+                    throw new Error("네트워크 응답이 올바르지 않습니다");
+                }
+
+                const jsonData = await response.data.data.content;
+
+                console.log(jsonData)
+                setTourList(jsonData);
+                
             } catch (error) {
                 console.error("데이터를 불러오는 중 오류 발생:", error);
             }
+            
         }
-        // fetchData 함수 호출
-        fetchData();
-    }, []);
-
+        function searchData(){
+            setTourList(data);
+        }
+        if(data.length <= 0){
+            fetchData();
+        }else{
+            searchData()
+        }
+    }, [setTourList, page, areaData.areacode, data]);
+    console.log(data)
     const handleAddButtonClick = useCallback(
         (item) => {
             const selectedDate = new Date().toISOString().substr(0, 10);
@@ -62,38 +83,25 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
         [selectedItems, setSelectedItems, selectedIndex, tourList]
     );
 
-    const itemsPerPage = 6;
-    const [currentPage, setCurrentPage] = useState(0);
-
-    const handlePreviousPage = useCallback(() => {
-        if (currentPage > 0) {
-            setCurrentPage(currentPage - 1);
+    const handleNext = () => {
+        setPage((prevPage) => prevPage + 1);
+    };
+    
+    const handlePrev = () => {
+        if (page > 0) {
+            setPage((prevPage) => prevPage - 1);
         }
-    }, [currentPage]);
+    };
 
-    const handleNextPage = useCallback(() => {
-        const filteredItems = tourList.filter((item) => item.areacode === areaData.areacode);
-        const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
 
-        if (currentPage < pageCount - 1) {
-            setCurrentPage(currentPage + 1);
-        }
-    }, [currentPage, areaData.areacode, tourList]);
-
-    const filteredItems = useMemo(() => {
-        return tourList.filter((item) => item.areacode === areaData.areacode);
-    }, [areaData.areacode, tourList]);
-
-    const displayedItems = useMemo(() => {
-        return filteredItems.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-    }, [currentPage, filteredItems]);
 
     return (
         <>
+            <PlanSearchBar areaData={areaData} onSearch={handleSearch} page={page}/>
             <Divider>
                 <h3 className="RecList">추천 관광지</h3>
             </Divider>
-            {displayedItems.map((item, i) => (
+            {tourList.map((item, i) => (
                 <Card
                     key={item.contentId}
                     sx={{
@@ -144,9 +152,11 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
                                 {textOverCut(item.addr1, 15, "...")}
                             </Typography>
                         </Typography>
-                        <div>
+                        <div style={{display:"flex"}}>
                             <FavoriteIcon sx={{ fontSize: 13, color: "#F44336" }} />
+                            <p style={{margin:"0", fontSize:"2px"}}>{item.recommendCount}</p>
                             <StarIcon sx={{ fontSize: 14, color: "#FBC02D" }} />
+                            <p style={{margin:"0", fontSize:"2px"}}>{item.rating}</p>
                         </div>
                     </CardContent>
                     <div
@@ -174,14 +184,14 @@ export default function PlanCard({ selectedItems, setSelectedItems, selectedInde
                 </Card>
             ))}
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Button onClick={handlePreviousPage} disabled={currentPage === 0}>
+                <Button onClick={handlePrev} disabled={page === 0}>
                     {" "}
                     <ArrowBackIosNewIcon style={{ fontSize: "16px" }} />
                 </Button>
 
                 <Button
-                    onClick={handleNextPage}
-                    disabled={currentPage === Math.ceil(filteredItems.length / itemsPerPage) - 1}
+                    onClick={handleNext}
+                 
                 >
                     <ArrowForwardIosIcon style={{ fontSize: "16px" }} />
                 </Button>

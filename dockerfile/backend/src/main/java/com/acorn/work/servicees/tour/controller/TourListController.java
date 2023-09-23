@@ -28,9 +28,15 @@ public class TourListController {
 
     @RequestMapping("es/search/{areacode}")
     public ResponseEntity searchTourListByAreacode(@RequestParam("searchValue") String searchValue,Pageable pageable,@PathVariable String areacode){
-
+        if(searchValue == "" ){
+            System.out.println(searchValue  + "||" + areacode  + "||" + pageable);
+            return ResponseUtils.completed(tourListService.getTourListByAreacode(areacode,pageable));
+        }
+        System.out.println(searchValue + "||" + pageable  + "||" + areacode);
         return ResponseUtils.completed(tourListService.getTourList2(searchValue,pageable,areacode));
     }
+
+
 
 //    @RequestMapping("/es/search/{areacode}")
 //    public ResponseEntity searchlistByAreacode(@RequestParam("searchValue") String searchValue,@PathVariable String areacode, Pageable pageable){
@@ -91,6 +97,14 @@ public class TourListController {
     public ResponseEntity findByTourlistOrderByRatingDesc() {
         return ResponseUtils.completed(tourListService.getTourlistOrderByRatingDesc());
     }
+
+
+    @GetMapping("/es/list/areacode/{areacode}")
+    public ResponseEntity getTourlistPageFindByAreacode(@PathVariable String areacode,Pageable pageable) {
+        System.out.println(areacode);
+        return ResponseUtils.completed(tourListService.getTourlistPageOnAreacode(areacode,pageable));
+    }
+
 
     @RequestMapping("/es/addCountDesc/{areacode}")
     public ResponseEntity findByTourlistOrderByAddCountDesc(@PathVariable String areacode) {

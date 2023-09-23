@@ -46,7 +46,7 @@ public class controller {
   }
 
 
-//  @Scheduled(cron = "0/10 * * * * *" )
+//  @Scheduled(cron = "0/15 * * * * *" )
   public void sendMsg() throws Exception{
 
 //    if(true && Webs){}
@@ -58,7 +58,7 @@ public class controller {
     GreetingMessag greetingMessag = GreetingMessag.builder()
             .content(gson.toJson(wordSearchService.comparisonWord())).build();
 
-    log.debug("cron 15초 이후 실행.. "
+    log.debug("cron 10초 이후 실행.. "
             + Thread.currentThread().getName() + " : "
             + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd'T'HH:mm:ss")));
 

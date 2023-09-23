@@ -50,4 +50,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     registry.addEndpoint("/gs-websocket")
             .setAllowedOrigins("*");
   }
+
+
 }

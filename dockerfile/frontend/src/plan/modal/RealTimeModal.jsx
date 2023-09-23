@@ -5,7 +5,7 @@ import axios from "axios";
 import * as StompJs from "@stomp/stompjs";
 
 const stompClient = new StompJs.Client({
-  brokerURL: "ws://192.168.0.40:9000/gs-websocket",
+  brokerURL: "ws://192.168.0.86:9000/gs-websocket",
 });
 const columns = [
   { id: "number", label: "번호" },

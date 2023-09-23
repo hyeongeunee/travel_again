@@ -43,4 +43,6 @@ public interface TourListDocRepository extends ElasticsearchRepository<TourListD
     Page<TourListDoc> findByAreacodeAndTitleOrOverviewOrAddr1(String areacode, String title, String overview, String addr1,Pageable pageable);
 
     Page<TourListDoc> findByAreacodeAndOverview(String areacode, String overview, Pageable pageable);
+
+    Page<TourListDoc> findByAreacode(String areacode, Pageable pageable);
 }

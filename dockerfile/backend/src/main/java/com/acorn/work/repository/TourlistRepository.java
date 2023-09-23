@@ -20,4 +20,5 @@ public interface TourlistRepository extends JpaRepository<TourlistEntity, String
     List<TourlistEntity> findAllByOrderByRecommendCountDesc(Pageable pageable);
 
     List<TourlistEntity> findAllByOrderByAddCountDesc(Pageable pageable);
+
 }

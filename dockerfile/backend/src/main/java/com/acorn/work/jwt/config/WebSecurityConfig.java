@@ -72,7 +72,6 @@ public class WebSecurityConfig {
                 )
                 .permitAll()
                 .anyRequest().authenticated()
-
         );
 
         http.authenticationManager(authentication -> {

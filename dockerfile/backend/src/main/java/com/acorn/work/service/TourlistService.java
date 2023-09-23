@@ -78,4 +78,5 @@ public class TourlistService {
     public List<TourlistDTO> getTourlistByAdd(Pageable pageable) {
         return TourlistMapper.INSTANCE.toDTOs(tourlistRepository.findAllByOrderByAddCountDesc(pageable));
     }
+
 }

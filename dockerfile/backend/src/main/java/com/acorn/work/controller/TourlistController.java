@@ -25,6 +25,7 @@ public class TourlistController {
         return ResponseUtils.completed(tourlistService.getTourlistPage(pageable));
     }
 
+
     // tourlist by areacode 리스트 (page)
     @GetMapping("/list/areacode/{areacode}")
     public ResponseEntity getTourlistPageFindByAreacode(@PathVariable String areacode,Pageable pageable) {

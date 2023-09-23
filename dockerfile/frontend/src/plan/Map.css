@@ -1,7 +1,5 @@
 .overlaybox {
     position: relative;
-    width: 250px;
-    height: 390px;
     background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png') no-repeat;
     padding: 15px 10px;
 }
@@ -56,11 +54,11 @@
 .overlaybox span {
     width: 250px;
     position: relative;
-    margin-bottom: 2px;
     background: #2b2d36;
     color: #aaabaf;
     line-height: 1;
     overflow: hidden;
+    font-size: 14.2px;
 }
 
 .overlaybox span .title {

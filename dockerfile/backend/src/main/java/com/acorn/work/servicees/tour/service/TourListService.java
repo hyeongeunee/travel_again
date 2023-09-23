@@ -26,7 +26,6 @@ public class TourListService {
 
     private final TourListDocRepository tourListDocRepository;
     private final WordSearchService wordSearchService;
-//    private final SearchDocRepository searchDocRepository;
 
     // 테스트용
     public List<TourListEcDTO> getTourList() {
@@ -144,8 +143,8 @@ public class TourListService {
     }
 
 
-    public ResponsePageDTO getTourListByAreacode(String searchValue, String areacode, Pageable pageable) {
-        return ResponsePageDTO.setResponsePageDTO(null);
+    public Page<TourListDoc> getTourListByAreacode(String areacode, Pageable pageable) {
+        return tourListDocRepository.findByAreacode(areacode,pageable);
     }
     public List<TourListDoc> getTourlistByAddCountTop9() {
         Pageable pageable = PageRequest.of(0,9);
@@ -162,4 +161,7 @@ public class TourListService {
         return tourListDocRepository.findByOrderByRatingDesc(pageable);
     }
 
+    public Page<TourListDoc> getTourlistPageOnAreacode(String areacode, Pageable pageable) {
+        return tourListDocRepository.findByAreacode(areacode,pageable);
+    }
 }

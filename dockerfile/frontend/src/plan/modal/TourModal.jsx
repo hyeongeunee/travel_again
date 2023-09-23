@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 const TourModal = ({ isOpen, onClose, contentid }) => {
     const [expanded, setExpanded] = useState(false);
     const [contentHeight, setContentHeight] = useState('auto');
+    
 
     useEffect(() => {
         if (contentRef.current) {
@@ -21,7 +22,9 @@ const TourModal = ({ isOpen, onClose, contentid }) => {
     const contentRef = useRef(null);
 
     if (!isOpen) return null;
-    const tourData = tourjson.find((item) => item.contentid === contentid);
+
+    const tourData = tourjson.find((item) => item.contentid === parseInt(contentid));
+    
 
     const handleExpandToggle = () => {
         setExpanded(!expanded);
